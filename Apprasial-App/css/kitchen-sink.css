@@ -696,9 +696,15 @@ a.link{
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   display: none;
-  overflow: auto;
+  overflow: hidden;
   border-radius: 15px;
   color:#F2F2F2;
+  box-shadow: 4px 4px 3px #888888;
+}
+
+.widget-popup-header-bar{
+	height: 35px;
+	background: #3a7cd8;
 }
 
 .blur{

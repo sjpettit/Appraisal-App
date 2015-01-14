@@ -11,13 +11,13 @@
 									<div style="width:49%">
 										<div>Unit Charge $</div>
 										<div>
-											<input type="text" id="unit-charge" data-bind="value: DescriptionUnitCharge" placeholder="Unit Charge $" />
+											<input type="text" id="unit-charge" class="text-number" data-bind="value: DescriptionUnitCharge" placeholder="Unit Charge $" />
 										</div>
 									</div>
 									<div style="width:40%">
 									<div>per month X 12 $</div>
 										<div>
-											<input type="text" id="per-month" data-bind="value: DescriptionPerMonth" placeholder="per month X 12 $"/>
+											<input type="text" id="per-month" class="text-number" data-bind="value: DescriptionPerMonth" placeholder="per month X 12 $"/>
 										</div>
 									</div>
 									<div>&nbsp;</div>
@@ -33,7 +33,7 @@
 									<div style="width:100%">
 										<div>Annual assessment charge per year per square feet of gross living area = $ </div>
 										<div>
-											<input type="text" id="assessment-charge" data-bind="value: DescriptionGrossArea" placeholder="assessment charge $" />
+											<input type="text" id="assessment-charge" class="text-number" data-bind="value: DescriptionGrossArea" placeholder="assessment charge $" />
 										</div>
 									</div>
 								</div>
@@ -41,7 +41,7 @@
 					</li>
 					</ul>
 					<div class="content-block-title">
-					<b>Utilities</b>
+					<b>Utilities included in the monthly assessment</b>
 				</div>
 				<div class="list-block">
 					<ul>
@@ -50,9 +50,9 @@
 								<div class="item-inner">
 									<div id="utilities-radio-group" class="inputCheck" style="width:100%">
 										<div>
-											<div style="display:inline-block; width:24%">
+											<div style="display:inline-block; width:32%">
 												<label class="label-checkbox item-content">
-													<input type="checkbox" name="utilities" class="radio" value="None" data-bind="checked: DescriptionUtilitesChecked" />
+													<input type="checkbox" name="utilities-radio" class="radio" value="None" data-bind="checked: DescriptionUtilitesChecked" />
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -61,9 +61,9 @@
 													</div>
 												</label>
 											</div>
-											<div style="display:inline-block; width:24%">
+											<div style="display:inline-block; width:32%">
 												<label class="label-checkbox item-content">
-													<input type="checkbox" name="utilities" class="radio" value="Heat" data-bind="checked: DescriptionUtilitesChecked"/>
+													<input type="checkbox" name="utilities-radio" class="radio" value="Heat" data-bind="checked: DescriptionUtilitesChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -72,9 +72,9 @@
 													</div>
 												</label>
 											</div>
-											<div style="display:inline-block; width:24%">
+											<div style="display:inline-block; width:32%">
 												<label class="label-checkbox item-content">
-													<input type="checkbox" name="utilities" class="radio" value="AC" data-bind="checked: DescriptionUtilitesChecked"/>
+													<input type="checkbox" name="utilities-radio" class="radio" value="AC" data-bind="checked: DescriptionUtilitesChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -83,9 +83,11 @@
 													</div>
 												</label>
 											</div>
-											<div style="display:inline-block; width:24%">
+										</div>
+										<div>
+											<div style="display:inline-block; width:32%">
 												<label class="label-checkbox item-content">
-													<input type="checkbox" name="utilities" class="radio" value="Electricity" data-bind="checked: DescriptionUtilitesChecked"/>
+													<input type="checkbox" name="utilities-radio" class="radio" value="Electricity" data-bind="checked: DescriptionUtilitesChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -94,11 +96,9 @@
 													</div>
 												</label>
 											</div>
-										</div>
-										<div>
-											<div style="display:inline-block; width:24%">
+											<div style="display:inline-block; width:32%">
 												<label class="label-checkbox item-content">
-													<input type="checkbox" name="utilities" class="radio" value="Gas" data-bind="checked: DescriptionUtilitesChecked"/>
+													<input type="checkbox" name="utilities-radio" class="radio" value="Gas" data-bind="checked: DescriptionUtilitesChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -107,9 +107,9 @@
 													</div>
 												</label>
 											</div>
-											<div style="display:inline-block; width:24%">
+											<div style="display:inline-block; width:32%">
 												<label class="label-checkbox item-content">
-													<input type="checkbox" name="utilities" class="radio" value="Water" data-bind="checked: DescriptionUtilitesChecked"/>
+													<input type="checkbox" name="utilities-radio" class="radio" value="Water" data-bind="checked: DescriptionUtilitesChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -118,9 +118,11 @@
 													</div>
 												</label>
 											</div>
-											<div style="display:inline-block; width:24%">
+										</div>
+										<div>
+											<div style="display:inline-block; width:32%">
 												<label class="label-checkbox item-content">
-													<input type="checkbox" name="utilities" class="radio" value="Sewer" data-bind="checked: DescriptionUtilitesChecked"/>
+													<input type="checkbox" name="utilities-radio" class="radio" value="Sewer" data-bind="checked: DescriptionUtilitesChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -129,9 +131,9 @@
 													</div>
 												</label>
 											</div>
-											<div style="display:inline-block; width:24%">
+											<div style="display:inline-block; width:32%">
 												<label class="label-checkbox item-content">
-													<input type="checkbox" name="utilities" class="radio" value="Cable" data-bind="checked: DescriptionUtilitesChecked"/>
+													<input type="checkbox" name="utilities-radio" class="radio" value="Cable" data-bind="checked: DescriptionUtilitesChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -140,9 +142,9 @@
 													</div>
 												</label>
 											</div>
-											<div style="display:inline-block; width:24%">
+											<div style="display:inline-block; width:32%">
 												<label class="label-checkbox item-content">
-													<input type="checkbox" name="utilities" class="radio" value="Other (describe)" data-bind="checked: DescriptionUtilitesChecked"/>
+													<input type="checkbox" name="utilities-radio" class="radio" value="Other (describe)" data-bind="checked: DescriptionUtilitesChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -169,78 +171,80 @@
 							</div>
 						</li>
 						<li>
-						<div>	<b>Sources Used for Physical Characteristics of Property</b> </div>
 							<div class="item-content"> 
 								<div class="item-inner">
-									<div id="sources-radio-group" class="inputCheck" style="width:100%">
-										<div>
-											<div style="display:inline-block; width:33%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" class="radio" name="sources" value="Appraisal Files" data-bind="checked: DescriptionSourcesChecked" />
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Appraisal Files</div>
-													</div>
-												</label>
+									<div style="width:100%">
+										<div>Sources Used for Physical Characteristics of Property</div>
+										<div id="sources-radio-group" class="inputCheck" style="width:100%">
+											<div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" class="radio" name="sources-radio" value="Appraisal Files" data-bind="checked: DescriptionSourcesChecked" />
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Appraisal Files</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" class="radio" name="sources-radio" value="MLS" data-bind="checked: DescriptionSourcesChecked" />
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>MLS</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" class="radio" name="sources-radio" value="TaxRecords" data-bind="checked: DescriptionSourcesChecked" />
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Assessment and Tax Records</div>
+														</div>
+													</label>
+												</div>
 											</div>
-										</div>
-										<div>
-											<div style="display:inline-block; width:33%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" class="radio" name="sources" value="MLS" data-bind="checked: DescriptionSourcesChecked" />
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>MLS</div>
-													</div>
-												</label>
-											</div>
-											<div style="display:inline-block; width:33%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" class="radio" name="sources" value="TaxRecords" data-bind="checked: DescriptionSourcesChecked" />
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Assessment and Tax Records</div>
-													</div>
-												</label>
-											</div>
-											<div style="display:inline-block; width:33%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" class="radio" name="sources" value="PriorInspection" data-bind="checked: DescriptionSourcesChecked" />
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Prior Inspection</div>
-													</div>
-												</label>
-											</div>
-											<div style="display:inline-block; width:33%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" class="radio" name="sources" value="PropertyOwner" data-bind="checked: DescriptionSourcesChecked" />
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Property Owner</div>
-													</div>
-												</label>
-											</div>
-											<div style="display:inline-block; width:33%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" class="radio" name="sources" value="Other (describe)" data-bind="checked: DescriptionSourcesChecked" />
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Other (describe)</div>
-													</div>
-												</label>
+											<div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" class="radio" name="sources-radio" value="PriorInspection" data-bind="checked: DescriptionSourcesChecked" />
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Prior Inspection</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" class="radio" name="sources-radio" value="PropertyOwner" data-bind="checked: DescriptionSourcesChecked" />
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Property Owner</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" class="radio" name="sources-radio" value="Other (describe)" data-bind="checked: DescriptionSourcesChecked" />
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Other (describe)</div>
+														</div>
+													</label>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -253,20 +257,16 @@
 									<div style="width:49%">
 										<div>If Other, Describe</div>
 										<div>
-											<input type="text" id="appliances-other" class="text-filled"  data-bind="checked: DescriptionSourcesOther" placeholder="If Other, Describe" />
+											<input type="text" id="sources-other"  data-bind="checked: DescriptionSourcesOther" placeholder="If Other, Describe" />
 										</div>
 									</div>
-								</div> 
-							</div>
-							<div class="item-content">
-								<div class="item-inner">
 									<div style="width:49%">
 										<div>Data Source(s) for Gross Living Area</div>
 										<div>
-											<input type="text" id="data-sources-other" class="text-filled" placeholder="If Other, Describe" />
+											<input type="text" id="data-sources-other" class="text-filled" placeholder="Data Sources" />
 										</div>
 									</div>
-								</div>
+								</div> 
 							</div>
 						</li>
 					</ul>
@@ -319,18 +319,18 @@
 									<div style="width:49%">
 										<div>AC Type</div>
 										<div>
-											<select id="AC-type" class="dropdown" data-bind="value: DescriptionAcTypeSelected">
+											<select id="ac-type" class="dropdown" data-bind="value: DescriptionAcTypeSelected">
 												<option>Select</option>
 												<option>Central AC</option>
 												<option>Individual AC</option>
-												<option>Other</option>
+												<option id="ac-type-dependent" class="dependent">Other</option>
 											</select>
 										</div>
 									</div>
 									<div style="width:49%">
 										<div>&nbsp;</div>
 										<div>
-											<input type="text" id="ac-other" class="text-filled" data-bind="value: DescriptionAcTypeOther" placeholder="If Other, describe" />
+											<input type="text" id="ac-type-dependent-other" data-bind="value: DescriptionAcTypeOther" placeholder="If Other, describe" />
 										</div>
 									</div>
 								</div>
@@ -343,65 +343,67 @@
 						<li>
 							<div class="item-content">
 								<div class="item-inner">
-									<div style="width:49%">
+									<div style="width:100%">
 										<div>Amenities</div>
 										<div id="amenities-radio-group" class="inputCheck" style="width:100%">
-										<div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="amenities" class="radio" value="Fireplace" data-bind="checked: DescriptionAmenitiesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Fireplace(s) #</div>
-													</div>
-												</label>
+											<div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="amenities-radio" class="radio" value="Fireplace" data-bind="checked: DescriptionAmenitiesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Fireplace(s) #</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="amenities-radio" class="radio" value="Woodstoves" data-bind="checked: DescriptionAmenitiesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Woodstove(s) #</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="amenities-radio" class="radio" value="Deck/Patio" data-bind="checked: DescriptionAmenitiesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Deck/Patio</div>
+														</div>
+													</label>
+												</div>
 											</div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="amenities" class="radio" value="Woodstoves" data-bind="checked: DescriptionAmenitiesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Woodstove(s) #</div>
-													</div>
-												</label>
-											</div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="amenities" class="radio" value="Deck/Patio" data-bind="checked: DescriptionAmenitiesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Deck/Patio</div>
-													</div>
-												</label>
-											</div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="amenities" class="radio" value="Porch/Balcony" data-bind="checked: DescriptionAmenitiesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Porch/Balcony</div>
-													</div>
-												</label>
-											</div>
-										</div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="appliances" class="radio" value="Other" data-bind="checked: DescriptionAmenitiesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Other</div>
-													</div>
-												</label>
+											<div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="amenities-radio" class="radio" value="Porch/Balcony" data-bind="checked: DescriptionAmenitiesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Porch/Balcony</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="appliances" class="radio" value="Other" data-bind="checked: DescriptionAmenitiesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Other</div>
+														</div>
+													</label>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -414,13 +416,13 @@
 									<div style="width:49%">
 									<div>Fireplace(s) #</div>
 										<div>
-											<input type="text" id="number-of-fireplaces" data-bind="value: DescriptionFireplaceNum" placeholder="Fireplace(s) #" />
+											<input type="text" id="number-of-fireplaces" class="text-number" data-bind="value: DescriptionFireplaceNum" placeholder="Fireplace(s) #" />
 										</div>
 									</div>
 									<div style="width:49%">
 									<div>Woodstove(s) #</div>
 										<div>
-											<input type="text" id="number-of-woodstoves" data-bind="value: DescriptionWoodstoveNum" placeholder="Woodstove(s) #" />
+											<input type="text" id="number-of-woodstoves" class="text-number" data-bind="value: DescriptionWoodstoveNum" placeholder="Woodstove(s) #" />
 										</div>
 									</div>
 								</div>
@@ -429,80 +431,88 @@
 						<li>
 							<div class="item-content">
 								<div class="item-inner">
-									<div style="width:49%">
+									<div style="width:100%">
 										<div>Appliances</div>
 										<div id="appliances-radio-group" class="inputCheck" style="width:100%">
-										<div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="appliances" class="radio" value="Refrigerator" data-bind="checked: DescriptionAppliancesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Refrigerator</div>
-													</div>
-												</label>
+											<div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="appliances-radio" class="radio" value="Refrigerator" data-bind="checked: DescriptionAppliancesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Refrigerator</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="appliances-radio" class="radio" value="Range/Oven" data-bind="checked: DescriptionAppliancesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Range/Oven</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="appliances-radio" class="radio" value="Disp" data-bind="checked: DescriptionAppliancesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Disp</div>
+														</div>
+													</label>
+												</div>
 											</div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="appliances" class="radio" value="Range/Oven" data-bind="checked: DescriptionAppliancesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Range/Oven</div>
-													</div>
-												</label>
-											</div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="appliances" class="radio" value="Disp" data-bind="checked: DescriptionAppliancesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Disp</div>
-													</div>
-												</label>
-											</div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="appliances" class="radio" value="Microwave" data-bind="checked: DescriptionAppliancesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Microwave</div>
-													</div>
-												</label>
-											</div>
-										</div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="appliances" class="radio" value="Dishwasher" data-bind="checked: DescriptionAppliancesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Dishwasher</div>
-													</div>
-												</label>
-											</div>
-											<div style="display:inline-block; width:49%">
-												<label class="label-checkbox item-content">
-													<input type="checkbox" name="appliances" class="radio" value="Washer/Dryer" data-bind="checked: DescriptionAppliancesChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Washer/Dryer</div>
-													</div>
-												</label>
+											<div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="appliances-radio" class="radio" value="Microwave" data-bind="checked: DescriptionAppliancesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Microwave</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="appliances-radio" class="radio" value="Dishwasher" data-bind="checked: DescriptionAppliancesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Dishwasher</div>
+														</div>
+													</label>
+												</div>
+												<div style="display:inline-block; width:32%">
+													<label class="label-checkbox item-content">
+														<input type="checkbox" name="appliances-radio" class="radio" value="Washer/Dryer" data-bind="checked: DescriptionAppliancesChecked"/>
+														<div class="item-media">
+															<i class="icon icon-form-checkbox"></i>
+														</div>
+														<div class="item-inner" style="border:none;">
+															<div>Washer/Dryer</div>
+														</div>
+													</label>
+												</div>
 											</div>
 										</div>
 									</div>
-									<div style="width:49%">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div style="width:100%">
 										<div>Car Storage</div>
 										<div>
 											<select id="car-storage" class="dropdown" data-bind="value: DescriptionCarStorageSelected" >
@@ -515,7 +525,8 @@
 										</div>
 									</div>
 								</div>
-							</li>
+							</div>
+						</li>
 						<li>
 							<div class="item-content">
 								<div class="item-inner">
@@ -644,7 +655,7 @@
 								<div class="item-inner">
 									<div style="width:100%">
 										<div>
-											Describe the condition of the property (including needed repairs, deterioration,
+											Describe the condition of the property (including apparent needed repairs, deterioration,
 											renovations, remodeling, etc.).
 										</div>
 										<div>
@@ -668,13 +679,13 @@
 									<div style="width:49%">
 										<select id="physical-deficiencies" class="dropdown" data-bind="value: DescriptionDeficienciesSelected">
 											<option>Select</option>
-											<option>Yes</option>
+											<option id="physical-deficiencies-dependent" class="dependent">Yes</option>
 											<option>No</option>
 										</select>
 									</div>
 									<div style="width:49%">
 										<div class="item-input">
-											<input type="text" class="text-filled" id="physical-deficiencies-yes" data-bind="value: DescriptionDeficienciesYes" placeholder="If Yes, describe" />
+											<input type="text" id="physical-deficiencies-dependent-other" data-bind="value: DescriptionDeficienciesYes" placeholder="If Yes, describe" />
 										</div>
 									</div>
 								</div>
@@ -693,11 +704,11 @@
 										<select id="conform-to-neighborhood" class="dropdown" data-bind="value: DescriptionConformSelected">
 											<option>Select</option>
 											<option>Yes</option>
-											<option>No</option>
-											</select>
+											<option id="conform-to-neighborhood-dependent" class="dependent">No</option>
+										</select>
 									</div>
 									<div class="item-input" style="width:49%">
-										<input type="text" class="text-filled" id="conform-to-neighborhood-no" data-bind="value: DescriptionConformNo" placeholder="If No, describe" />
+										<input type="text" id="conform-to-neighborhood-dependent-other" data-bind="value: DescriptionConformNo" placeholder="If No, describe" />
 									</div>
 								</div>
 							</div>

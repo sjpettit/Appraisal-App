@@ -55,19 +55,23 @@
                           </div>
                         </div>
                       </li>
+					  </ul>
 					  </div>
 					  </div>
-					  </li>
+				</li>
 					  <!--end of other tabs-->
                      <!-- Subject -->
-                  <li class="accordion-item">
-                <a href="#" id="subject-hash" class="item-link item-content" >
-                  <div class="item-inner">
-                    <div class="item-title">
-                      <B>Subject</B>
-                    </div>
-                  </div>
-                </a>
+				<li class="accordion-item">
+					<a href="#" id="subject-hash" class="item-link item-content" >
+					  <div class="item-inner">
+						<div class="item-title">
+						  <B>Subject</B>
+						</div>
+					  </div>
+					</a>
+					<div class="accordion-item-content">
+						<div class="content-block">
+							<ul>
                       <li>
                         <div class="item-content">
                           <div class="item-inner">
@@ -758,7 +762,7 @@
                               <div id="comparable-one-net-adjustment-radio-group" class="inputCheck">
                                 <div style="display:inline-block; width:49%">
                                   <label class="label-checkbox item-content">
-                                    <input type="radio" name="comparable-one-net-adjustment-checkbox" class="radio" value="+" class="radio" data-bind="checked: scaCompOneNetAdjustment"/>
+                                    <input type="radio" name="comparable-one-net-adjustment-radio" class="radio" value="+" class="radio" data-bind="checked: scaCompOneNetAdjustment"/>
                                     <div class="item-media">
                                       <i class="icon icon-form-checkbox"></i>
                                     </div>
@@ -769,7 +773,7 @@
                                 </div>
                                 <div style="display:inline-block; width:49%">
                                   <label class="label-checkbox item-content">
-                                    <input type="radio" name="comparable-one-net-adjustment-checkbox" class="radio" value="-" data-bind="checked: scaCompOneNetAdjustmentChecked"/>
+                                    <input type="radio" name="comparable-one-net-adjustment-radio" class="radio" value="-" data-bind="checked: scaCompOneNetAdjustmentChecked"/>
                                     <div class="item-media">
                                       <i class="icon icon-form-checkbox"></i>
                                     </div>
@@ -1284,7 +1288,7 @@
                               <div id="comparable-two-net-adjustment-radio-group" class="inputCheck">
                                 <div style="display:inline-block; width:49%">
                                   <label class="label-checkbox item-content">
-                                    <input type="radio" name="comparable-two-net-adjustment-checkbox" value="+" class="radio" data-bind="checked:scaCompTwoNetAdjustmentChecked"/>
+                                    <input type="radio" name="comparable-two-net-adjustment-radio" value="+" class="radio" data-bind="checked:scaCompTwoNetAdjustmentChecked"/>
                                     <div class="item-media">
                                       <i class="icon icon-form-checkbox"></i>
                                     </div>
@@ -1295,7 +1299,7 @@
                                 </div>
                                 <div style="display:inline-block; width:49%">
                                   <label class="label-checkbox item-content">
-                                    <input type="radio" name="comparable-two-net-adjustment-checkbox" value="-" class="radio" data-bind="checked:scaCompTwoNetAdjustmentChecked"/>
+                                    <input type="radio" name="comparable-two-net-adjustment-radio" value="-" class="radio" data-bind="checked:scaCompTwoNetAdjustmentChecked"/>
                                     <div class="item-media">
                                       <i class="icon icon-form-checkbox"></i>
                                     </div>
@@ -1810,7 +1814,7 @@
                               <div id="comparable-three-net-adjustment-radio-group" class="inputCheck">
                                 <div style="display:inline-block; width:49%">
                                   <label class="label-checkbox item-content">
-                                    <input type="radio" name="comparable-three-net-adjustment-checkbox" value="+" class="radio" data-bind="checked:scaCompThreeNetAdjustmentChecked"/>
+                                    <input type="radio" name="comparable-three-net-adjustment-radio" value="+" class="radio" data-bind="checked:scaCompThreeNetAdjustmentChecked"/>
                                     <div class="item-media">
                                       <i class="icon icon-form-checkbox"></i>
                                     </div>
@@ -1821,7 +1825,7 @@
                                 </div>
                                 <div style="display:inline-block; width:49%">
                                   <label class="label-checkbox item-content">
-                                    <input type="radio" name="comparable-three-net-adjustment-checkbox" value="-" class="radio" data-bind="checked:scaCompThreeNetAdjustmentChecked"/>
+                                    <input type="radio" name="comparable-three-net-adjustment-radio" value="-" class="radio" data-bind="checked:scaCompThreeNetAdjustmentChecked"/>
                                     <div class="item-media">
                                       <i class="icon icon-form-checkbox"></i>
                                     </div>
@@ -1871,9 +1875,9 @@
                   </div>
                 </div>
               </li>
-			<!--Research and Data Sources-->
+			<!-- Research and Data Sources -->
 			  <li class="accordion-item">
-                <a href="#" id="subject-hash" class="item-link item-content" >
+                <a href="#" class="item-link item-content" onclick="scrollTo('subject-hash');">
                   <div class="item-inner">
                     <div class="item-title">
                       <B>Research and Data Sources</B>
@@ -1888,24 +1892,24 @@
                           <div class="item-inner">
                             <div style="width:100%">
                               <div>
-                               Indicated Value by Sales Comparison Approach $
+                                Summary of Sales Comparison Approach
                               </div>
                              <div>
-                                <input type="text" id="Indicated-Value-Sales-Comparison-Approach" data-bind="value:scaRndIndicatedValue" placeholder="Sales Comparison Approach $" />
+                                <textarea type="text" id="subject-comparable-summary-or-sales-comparison-approach" data-bind="value:scaRndSubjectComparableSummary" placeholder="Summary"></textarea>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div>  
                       </li>
 					     <li>
                         <div class="item-content">
                           <div class="item-inner">
                             <div style="width:100%">
                               <div>
-                                Summary of Sales Comparison Approach
+                                Indicated Value by Sales Comparison Approach $
                               </div>
                               <div>
-                                <textarea type="text" id="subject-comparable-summary-or-sales-comparison-approach" data-bind="value:scaRndSubjectComparableSummary" placeholder="Summary"></textarea>
+                                <input type="text" id="indicated-value-sales-comparison-approach" class="text-number" data-bind="value:scaRndIndicatedValue" placeholder="Sales Comparison Approach $" />
                               </div>
                             </div>
                           </div>

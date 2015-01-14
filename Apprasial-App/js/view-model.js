@@ -1001,9 +1001,9 @@ var data = {
 	DescriptionUnitCharge: '',
 	DescriptionPerMonth: '',
 	DescriptionGrossArea: '',
-	DescriptionUtilitesChecked: '',
+	DescriptionUtilitesChecked: [],
 	DescriptionUtilitiesOther: '',
-	DescriptionSourcesChecked: '',
+	DescriptionSourcesChecked: [],
 	DescriptionSourcesOther: '',
 	DescriptionFloorNum: '',
 	DescriptionNumLevels: '',
@@ -1016,10 +1016,10 @@ var data = {
 	DescriptionTrimFinish: '',
 	DescriptionBathWainscot: '',
 	DescriptionDoors: '',
-	DescriptionAmenitiesChecked: ['Select'],
+	DescriptionAmenitiesChecked: [],
 	DescriptionFireplaceNum: '',
 	DescriptionWoodstoveNum: '',
-	DescriptionAppliancesChecked: '',
+	DescriptionAppliancesChecked: [],
 	DescriptionCarStorageSelected: ['Select'],
 	DescriptionNumCars: '',
 	DescriptionAssignedChecked: '',
@@ -1092,6 +1092,8 @@ function reapplyBindings()
 	  });
 	});
 	
+	limitCharacterLength();
+	
 	alternateComments();
 	
 }
@@ -1099,13 +1101,34 @@ function reapplyBindings()
 function alternateComments()
 {
 	$('.direction-l').each(function(i, element){
-			$(this).removeClass('direction-l')
-			$(this).addClass('direction-r')
-		});
+		$(this).removeClass('direction-l')
+		$(this).addClass('direction-r')
+	});
+	var numComments = 0;
+	try
+	{
+		numComments = ko.mapping.toJS(viewModel).notesComments.length;
+	}
+	catch(err)
+	{
+		//console.log(err);
+		numComments = 0;
+	}
+	
+	if(numComments%2 == 0)
+	{
 		$('.direction-r').filter(':odd').each(function(i, element){
 			$(this).removeClass('direction-r')
 			$(this).addClass('direction-l')
 		});
+	}
+	else
+	{
+		$('.direction-r').filter(':even').each(function(i, element){
+			$(this).removeClass('direction-r')
+			$(this).addClass('direction-l')
+		});
+	}
 }
 
 function saveAsJSON()
@@ -1125,4 +1148,9 @@ function drawToCanvas(id, dataUrl)
 	  ctx.drawImage(img,0,0); // Or at whatever offset you like
 	};
 	img.src = dataUrl;
+}
+
+function limitCharacterLength()
+{
+	$('input').attr('maxLength', 400);
 }

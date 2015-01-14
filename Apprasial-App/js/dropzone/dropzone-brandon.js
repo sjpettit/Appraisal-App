@@ -293,7 +293,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
       withCredentials: false,
       parallelUploads: 2,
       uploadMultiple: true,
-      maxFilesize: 256,
+      maxsize: 256,
       paramName: "file",
       createImageThumbnails: true,
       maxThumbnailFilesize: 10,
@@ -466,26 +466,9 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
            return function(e) {
              e.preventDefault();
              e.stopPropagation();
-             /*for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
                 node = _ref[_i];
-              }*/
-				for (_i = 0, _len = _ref.length; _i < _len; _i++) { 
-					node = _ref[_i]; 
-					/* var fileToLoad = file; 
-					var fileReader = new FileReader(); 
-					fileReader.onload = function(fileLoadedEvent) { 
-						var srcData = fileLoadedEvent.target.result; 
-						// <--- data: base64 console.log(srcData); 
-					} fileReader.readAsDataURL(fileToLoad); */ 
-					var fileName = file.name.split("."); 
-					//node.textContent = file.name + _i.toString(); 
-					// added - Somenath 
-					var newNumber = Math.floor((Math.random() * 1000000) + 1); 
-					var newName = fileName[0] + "_"+ newNumber.toString() +"."+fileName[1]; 
-					//console.log(newName); node.textContent = newName; 
-					// added - Somenath 
-				}
-			  
+              }
              fileName = prompt("Rename to?", node.textContent);
              if (fileName != null) {
               node.textContent = fileName;
@@ -505,7 +488,10 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
             _results.push(renameLink.addEventListener("click", renameFileEvent));
           }
 
+
           return _results;
+
+
 
         }
       },
@@ -1490,7 +1476,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
       if (this.options.params) {
         _ref1 = this.options.params;
         for (key in _ref1) {
-          value = _ref1[key];
+          value = _ref1[key]; 
           formData.append(key, value);
         }
       }
@@ -1520,20 +1506,32 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
           }
         }
       }
+	  var completeCount = 0;
       for (i = _m = 0, _ref5 = files.length - 1; 0 <= _ref5 ? _m <= _ref5 : _m >= _ref5; i = 0 <= _ref5 ? ++_m : --_m) {
-        
         _ref=files[i].previewElement.querySelectorAll("[data-dz-name]");
+		
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            node = _ref[_i];
-            formData.append(this._getParamName(i), files[i], node.textContent);
-            console.log(this._getParamName(i));
-            console.log(files[i]);
+			//var paramName = this._getParamName(i);
+			(function(file){
+				node = _ref[_i];
+				var anotherFileReader = new FileReader();
+				anotherFileReader.onloadend = function(){
+					console.log("RESULT: "+anotherFileReader.result);
+					//xhr.send(fileReader.result);
+					//formData.append(/*paramName*/'File['+completeCount+']', anotherFileReader.result, node.textContent);
+					formData.append(this._getParamName(i), files[i], node.textContent);
+					completeCount++;
+					if(completeCount == files.length){
+						console.log(formData);
+						return xhr.send(formData);
+					}
+				}
+				if(file){
+					anotherFileReader.readAsDataURL(file);
+				}
+			})(files[i]);
           }
-          
       }
-      console.log(formData);
-      console.log(document.formData);
-      return xhr.send(formData);
     };
 
     Dropzone.prototype._finished = function(files, responseText, e) {

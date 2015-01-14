@@ -12,7 +12,7 @@ window.mapPage = function(){
 
     var map;
 
-$$(document).on('click', '.show-marker', function(e){
+$$(document).on('touchend', '.show-marker', function(e){
 
     if(prevOrderDiv){
         prevOrderDiv.children[0].className = "item-content item-link show-marker";

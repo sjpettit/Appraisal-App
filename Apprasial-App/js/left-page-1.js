@@ -3,6 +3,7 @@
 window.leftPage1 = function(){
 
 	var leftPage1 = this;
+  var mcServer = 'https://morning-caverns-8224.herokuapp.com';
 
 	leftPage1.getLeftPage1 = function(myApp, mainView){
 	myApp.onPageBeforeAnimation('left-page-1', function(page) {
@@ -27,7 +28,7 @@ $$(document).on('click', '#tool-icon-1', function(e){
                 $('#state').attr('checked', false);
   $('#group-list').html("");
   $.ajax({
-            url: 'http://localhost:3000/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus=0',       
+            url: mcServer+ '/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus=0',       
             dataType:"text",
             beforeSend: function(xhr) {
                 myApp.showPreloader();
@@ -52,7 +53,7 @@ $$(document).on('click', '#tool-icon-2', function(e){
                 $('#state').attr('checked', false);
   $('#group-list').html("");
   $.ajax({
-            url: 'http://localhost:3000/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus=1',       
+            url: mcServer+ '/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus=1',       
             dataType:"text",
             beforeSend: function(xhr) {
                 myApp.showPreloader();
@@ -78,7 +79,7 @@ $$(document).on('click', '#tool-icon-3', function(e){
                 $('#state').attr('checked', false);
   $('#group-list').html("");
   $.ajax({
-            url: 'http://localhost:3000/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus=2',       
+            url: mcServer+ '/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus=2',       
             dataType:"text",
             beforeSend: function(xhr) {
                 myApp.showPreloader();

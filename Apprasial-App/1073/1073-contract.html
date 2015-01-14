@@ -22,7 +22,7 @@
 										</div>
 										<div>
 											<label class="label-checkbox item-content" >
-												<input id="didnotChk" type="radio" name="ContracktChk1" class="radio" value="Did" data-bind="checked: contractAnalyzeContractChecked"/>
+												<input id="didnotChk" type="radio" name="ContracktChk1" class="radio" value="Did not" data-bind="checked: contractAnalyzeContractChecked"/>
 												<div class="item-media">
 													<i class="icon icon-form-checkbox"></i>
 												</div>
@@ -82,7 +82,7 @@
 										<div id="property-seller-radio-group" class="inputCheck">
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content" >
-													<input id="ownerYesChk" type="radio" name="ContracktChk2" value="Yes" class="radio" data-bind="checked: contractPropertySellerChecked"/>
+													<input type="radio" name="property-seller-radio" value="Yes" class="radio" data-bind="checked: contractPropertySellerChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -93,7 +93,7 @@
 											</div>
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content" >
-													<input id="ownerNoChk" type="radio" name="ContracktChk2" value="No" class="radio" data-bind="checked: contractPropertySellerChecked"/>
+													<input type="radio" name="property-seller-radio" value="No" class="radio" data-bind="checked: contractPropertySellerChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -123,7 +123,7 @@
 										<div id="financial-assistance-radio-group" class="inputCheck">
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content">
-													<input id="confinAsstYes" type="radio" name="ContracktChk3" value="Yes" class="radio" data-bind="checked: contractFinancialAssistanceChecked"/>
+													<input id="financial-assistance-dependent" class="dependent" type="radio" name="financial-assistance-radio" value="Yes" class="radio" data-bind="checked: contractFinancialAssistanceChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -134,7 +134,7 @@
 											</div>
 											<div style="display:inline-block"> 
 												<label class="label-checkbox item-content">
-													<input id="confinAsstNo" type="radio" name="ContracktChk3" value="No" class="radio" data-bind="checked: contractFinancialAssistanceChecked"/>
+													<input type="radio" name="financial-assistance-radio" value="No" class="radio" data-bind="checked: contractFinancialAssistanceChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -148,7 +148,7 @@
 									<div style="width:49%">
 										<div>If Yes, report the total dollar amount and describe the items to be paid.</div> 
 										<div>
-											<textarea id="txtDescItmsPaid" class="text-filled" data-bind="value: contractFinancialAssistanceYes" placeholder="Description"></textarea>
+											<textarea id="financial-assistance-dependent-other" data-bind="value: contractFinancialAssistanceYes" placeholder="Description"></textarea>
 										</div>
 									</div>
 								</div>

@@ -15,10 +15,16 @@
 						<li>
 							<div class="item-content">
 								<div class="item-inner">
-									<div style="width:100%">
+									<div style="width:49%">
 										<div>Sales Comparison Approach $</div>
 										<div>
 											<input type="text" class="text-number" id="sales-comparison-approach" data-bind="value:reconSalesCompApproach" placeholder="$$$" />
+										</div>
+									</div>
+									<div style="width:49%">
+										<div>Income Approach (if developed)$</div>
+										<div>
+											<input type="text" class="text-number" data-bind="value:reconIncomeApproach" id="income-comparison-approach" placeholder="$$$" />
 										</div>
 									</div>
 								</div>
@@ -29,7 +35,7 @@
 								<div class="item-inner">
 									<div style="width:100%">
 										<div>This appraisal is made</div>
-										<div id="apprasial-status-radio-group" class="inputCheck">
+										<div id="appraisal-status-radio-group" class="inputCheck">
 											<label class="label-checkbox item-content">
 												<input type="radio" name="appraisal-status-radio" value="App1" data-bind="checked:reconApprasialStatusChecked" />
 												<div class="item-media">
@@ -95,16 +101,10 @@
 						<li>
 							<div class="item-content">
 								<div class="item-inner">
-									<div style="width:49%">
+									<div style="width:100%">
 										<div>Market value in $</div>
 										<div>
 											<input type="text" class="text-number" id="market-value" data-bind="value:reconMarketValue" placeholder="Market value" />
-										</div>
-									</div>
-									<div style="width:49%">
-										<div>Appraisal Date</div>
-										<div>
-											<input type="date" class="date" id="appraisal-date"  data-bind="value:reconAppraisalDate"/>
 										</div>
 									</div>
 								</div>
@@ -114,15 +114,9 @@
 							<div class="item-content">
 								<div class="item-inner">
 									<div style="width:49%">
-										<div>Date of Inspection</div>
+										<div>Date of Inspection/Effective Date</div>
 										<div>
 											<input type="date" class="date" id="date-of-inspection" data-bind="value:reconDateOfInspection"/>
-										</div>
-									</div>
-									<div style="width:49%">
-										<div>Effective Date</div>
-										<div>
-											<input type="date" class="date" id="effective-date" data-bind="value:reconEffectiveDate"/>
 										</div>
 									</div>
 								</div>

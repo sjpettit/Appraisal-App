@@ -11,7 +11,7 @@
 									<div style="width:100%">
 									<div>Data Source(s) for project information</div>
 										<div>
-											<input type="text" id="data-sources-for-project" data-bind="value: informationDataSource" placeholder="Date Sources"/>
+											<input type="text" class="text-filled" id="data-sources-for-project" data-bind="value: informationDataSource" placeholder="Date Sources"/>
 										</div>
 									</div>
 								</div>
@@ -352,7 +352,7 @@
 										<div>
 											<div style="display:inline-block; width:33%">
 												<label class="label-checkbox item-content">
-													<input type="radio" name="properties" class="radio" value="Principle-Residence" data-bind="checked: informationOccupancyChecked"/>
+													<input type="radio" name="property-occupancy-radio" class="radio" value="Principle-Residence" data-bind="checked: informationOccupancyChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -363,7 +363,7 @@
 											</div>
 											<div style="display:inline-block; width:33%">
 												<label class="label-checkbox item-content">
-													<input type="radio" name="properties" class="radio" value="SecondHome" data-bind="checked: informationOccupancyChecked"/>
+													<input type="radio" name="property-occupancy-radio" class="radio" value="SecondHome" data-bind="checked: informationOccupancyChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -374,7 +374,7 @@
 											</div>
 											<div style="display:inline-block; width:33%">
 												<label class="label-checkbox item-content">
-													<input type="radio" name="properties" class="radio" value="Tenant" data-bind="checked: informationOccupancyChecked"/>
+													<input type="radio" name="property-occupancy-radio" class="radio" value="Tenant" data-bind="checked: informationOccupancyChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -398,7 +398,7 @@
 										<div id="controller-of-HOA-radio-group" class="inputCheck">
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content" >
-													<input id="ownerYesChk" type="radio" class="radio" name="HOA-developer" value="Yes" data-bind="checked: informationHoaDeveloperChecked"/>
+													<input id="ownerYesChk" type="radio" class="radio" name="controller-of-HOA-radio" value="Yes" data-bind="checked: informationHoaDeveloperChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -409,7 +409,7 @@
 											</div>
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content" >
-													<input id="ownerNoChk" type="radio" name="HOA-developer" class="radio" value="No" data-bind="checked: informationHoaDeveloperChecked"/>
+													<input id="ownerNoChk" type="radio" name="controller-of-HOA-radio" class="radio" value="No" data-bind="checked: informationHoaDeveloperChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>

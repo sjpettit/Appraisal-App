@@ -106,14 +106,7 @@
 							<li>
 								<div class="item-content">
 									<div class="item-inner">
-										<div style="width:49%">
-											<div>State #</div>
-											<div>
-												<input type="text" class="text-number" id="state-num" data-bind="value:appraiserStateNum" placeholder="###" />
-											</div>
-										</div>
-										<div> or </div>
-										<div style="width:49%">
+										<div style="width:100%">
 											<div>State</div>
 											<div>
 												<input type="text" class="text-filled" id="state-appraiser" data-bind="value:appraiserState" placeholder="State" />
@@ -315,45 +308,42 @@
 									<div class="item-inner">
 										<div style="width:49%">
 											<div>Subject Property</div>
-											<div id="subject-property-radio-group" class="inputCheck">
+											<div id="subject-property-supervisory-radio-group" class="inputCheck">
 												<label class="label-checkbox item-content">
-													<input type="radio" name="subject-property-supervisory-group" class ="radio" value="Other (describe)" data-bind="checked:appraiserSaSubjectPropertyChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Did not inspect subject property</div>
-													</div>
+												  <input type="radio" name="subject-property-supervisory-radio" class="radio" data-bind="checked:appraiserSaSubjectPropertyChecked" value="Did not inspect subject property" />
+												  <div class="item-media">
+													<i class="icon icon-form-checkbox"></i>
+												  </div>
+												  <div class="item-inner" style="border:none;">
+													<div>Did not inspect subject property</div>
+												  </div>
 												</label>
 												<label class="label-checkbox item-content">
-													<input type="radio" name="subject-property-supervisory-group" class="radio" value="Other (describe)" data-bind="checked:appraiserSaSubjectPropertyChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Did inspect exterior of subject property from street</div>
-													</div>
+												  <input type="radio" id="subject-property-supervisory-radio-dependent-1" name="subject-property-supervisory-radio" class="radio dependent"  data-bind="checked:appraiserSaSubjectPropertyChecked"
+													value="Did inspect exterior of subject property from street" onclick="$('#subject-property-supervisory-radio-dependent-1-other').css('display','block');$('#subject-property-supervisory-radio-dependent-2-other').css('display','none');"/>
+												  <div class="item-media">
+													<i class="icon icon-form-checkbox"></i>
+												  </div>
+												  <div class="item-inner" style="border:none;">
+													<div>Did inspect exterior of subject property from street</div>
+												  </div>
 												</label>
-													<label class="label-checkbox item-content">
-													<input type="radio" name="subject-property-supervisory-group" class ="radio" value="Other (describe)" data-bind="checked:appraiserSaSubjectPropertyChecked"/>
-													<div class="item-media">
-														<i class="icon icon-form-checkbox"></i>
-													</div>
-													<div class="item-inner" style="border:none;">
-														<div>Did inspect interior and exterior of subject property</div>
-													</div>
+												<label class="label-checkbox item-content">
+												  <input type="radio" id="subject-property-supervisory-radio-dependent-2" name="subject-property-supervisory-radio" class="radio dependent" data-bind="checked:appraiserSaSubjectPropertyChecked" 
+													value="Did inspect interior and exterior of subject" onclick="$('#subject-property-supervisory-radio-dependent-2-other').css('display','block');$('#subject-property-supervisory-radio-dependent-1-other').css('display','none');"/>
+												  <div class="item-media">
+													<i class="icon icon-form-checkbox"></i>
+												  </div>
+												  <div class="item-inner" style="border:none;">
+													<div>Did inspect interior and exterior of subject</div>
+												  </div>
 												</label>
 											</div>
 											<div>
-												<div>Date of inspection of exterior of subject property</div>
+												<div>Date of inspection</div>
 												<div>
-													<input type="date" class="date" id="subject-property-date-of-inspection" data-bind="value:appraiserSaSubjectPropertyDate" />
-												</div>
-											</div>
-												<div>
-												<div>Date of inspection of interior and exterior of subject property</div>
-												<div>
-													<input type="date" class ="date" id="subject-property-date-of-inspection" data-bind="value:appraiserSaSubjectPropertyDate"/>
+												  <input type="date" id="subject-property-supervisory-radio-dependent-1-other" data-bind="value:appraiserSaSubjectPropertyDate" />
+												  <input type="date" id="subject-property-supervisory-radio-dependent-2-other" style="display:none" data-bind="value:appraiserSaSubjectPropertyDate"/>
 												</div>
 											</div>
 										</div>
@@ -361,7 +351,7 @@
 											<div>Comparable Sales</div>
 											<div id="comparable-sales-radio-group" class="inputCheck">
 												<label class="label-checkbox item-content">
-													<input type="radio" name="comparable-sales-supervisory-group" class="radio" value="Other (describe)" data-bind="checked:appraiserSaCompSalesChecked"/>
+													<input type="radio" name="comparable-sales-radio-group" class="radio" value="Other (describe)" data-bind="checked:appraiserSaCompSalesChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -370,7 +360,7 @@
 													</div>
 												</label>
 												<label class="label-checkbox item-content">
-													<input type="radio" name="comparable-sales-supervisory-group" class="radio" value="Other (describe)" />
+													<input type="radio" id="comparable-sales-radio-dependent" name="comparable-sales-radio-group" class="radio dependent" value="Other (describe)" />
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -379,11 +369,10 @@
 													</div>
 												</label>
 											</div>
-											<div>&nbsp;</div>
 											<div>
 												<div>Date of inspection</div>
 												<div>
-													<input type="date" id="comparable-sales-date-of-inspection" class="date" data-bind="value:appraiserSaCompSalesDate"/>
+													<input type="date" id="comparable-sales-radio-dependent-other" data-bind="value:appraiserSaCompSalesDate"/>
 												</div>
 											</div>
 										</div>

@@ -31,7 +31,7 @@
 												<div id="location-radio-group" class="inputCheck" style="display:inline-block; width:60%;">
 													<div style="display:inline-block; width:32%">
 														<label class="label-checkbox item-content">
-															<input type="radio" id="urban" class="radio" name="NBChk1" value="urban" data-bind="checked: neighborhoodLocationSelected"/>
+															<input type="radio" id="urban" class="radio" name="location-radio" value="urban" data-bind="checked: neighborhoodLocationSelected"/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -42,7 +42,7 @@
 													</div>
 													<div style="display:inline-block; width:32%">
 														<label class="label-checkbox item-content">
-															<input type="radio" class="radio" id="suburban" name="NBChk1" value="suburban" data-bind="checked: neighborhoodLocationSelected"/>
+															<input type="radio" class="radio" id="suburban" name="location-radio" value="suburban" data-bind="checked: neighborhoodLocationSelected"/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -53,7 +53,7 @@
 													</div>
 													<div style="display:inline-block; width:32%">
 														<label class="label-checkbox item-content">
-															<input type="radio" id="rural" name="NBChk1" value="rural" class="radio" data-bind="checked: neighborhoodLocationSelected"/>
+															<input type="radio" id="rural" name="location-radio" value="rural" class="radio" data-bind="checked: neighborhoodLocationSelected"/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -75,7 +75,7 @@
 												<div id="built-up-radio-group" class="inputCheck" style="display:inline-block; width:60%;">
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkBU" class="radio" id="Over75" value="Over75" data-bind="checked: neighborhoodBuiltUpSelected" />
+															<input type="radio" name="built-up-radio" class="radio" id="Over75" value="Over75" data-bind="checked: neighborhoodBuiltUpSelected" />
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -86,7 +86,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkBU" class="radio" id="25-75" value="25-75" data-bind="checked: neighborhoodBuiltUpSelected" />
+															<input type="radio" name="built-up-radio" class="radio" id="25-75" value="25-75" data-bind="checked: neighborhoodBuiltUpSelected" />
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -97,7 +97,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkBU" class="radio" id="Under25" value="Under25" data-bind="checked: neighborhoodBuiltUpSelected"/>
+															<input type="radio" name="built-up-radio" class="radio" id="Under25" value="Under25" data-bind="checked: neighborhoodBuiltUpSelected"/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -119,7 +119,7 @@
 												<div id="growth-radio-group" class="inputCheck" style="display:inline-block; width:60%">
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkGrowth" class="radio" id="Rapid" value="Rapid" data-bind="checked: neighborhoodGrowthSelected" />
+															<input type="radio" name="growth-radio" class="radio" id="Rapid" value="Rapid" data-bind="checked: neighborhoodGrowthSelected" />
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -130,7 +130,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkGrowth" class="radio" id="Stable" value="Stable" data-bind="checked: neighborhoodGrowthSelected" />
+															<input type="radio" name="growth-radio" class="radio" id="Stable" value="Stable" data-bind="checked: neighborhoodGrowthSelected" />
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -141,7 +141,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkGrowth" class="radio" id="Slow" value="Slow" data-bind="checked: neighborhoodGrowthSelected"/>
+															<input type="radio" name="growth-radio" class="radio" id="Slow" value="Slow" data-bind="checked: neighborhoodGrowthSelected"/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -174,7 +174,7 @@
 												<div id="property-values-radio-group" class="inputCheck" style="display:inline-block; width:60%">
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkPTV" class="radio" value="Increasing" data-bind="checked: neighborhoodPropertyValuesSelected" />
+															<input type="radio" name="property-values-radio" class="radio" value="Increasing" data-bind="checked: neighborhoodPropertyValuesSelected" />
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -185,7 +185,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkPTV" class="radio" value="Stable" data-bind="checked: neighborhoodPropertyValuesSelected" />
+															<input type="radio" name="property-values-radio" class="radio" value="Stable" data-bind="checked: neighborhoodPropertyValuesSelected" />
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -196,7 +196,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkPTV" class="radio" value="Declining" data-bind="checked: neighborhoodPropertyValuesSelected" />
+															<input type="radio" name="property-values-radio" class="radio" value="Declining" data-bind="checked: neighborhoodPropertyValuesSelected" />
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -218,7 +218,7 @@
 												<div id="demand-supply-radio-group" class="inputCheck" style="display:inline-block; width:60%">
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkDS" class="radio" value="Shortage" data-bind="checked: neighborhoodDemandSupplySelected"/>
+															<input type="radio" name="demand-supply-radio" class="radio" value="Shortage" data-bind="checked: neighborhoodDemandSupplySelected"/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -229,7 +229,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkDS" class="radio" value="InBalance" data-bind="checked: neighborhoodDemandSupplySelected" />
+															<input type="radio" name="demand-supply-radio" class="radio" value="InBalance" data-bind="checked: neighborhoodDemandSupplySelected" />
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -240,7 +240,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkDS" class="radio" value="OverSupply" data-bind="checked: neighborhoodDemandSupplySelected"/>
+															<input type="radio" name="demand-supply-radio" class="radio" value="OverSupply" data-bind="checked: neighborhoodDemandSupplySelected"/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -262,7 +262,7 @@
 												<div id="marketing-time-radio-group" class="inputCheck" style="display:inline-block; width:60%">
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkMT" value="Under3months" data-bind="checked: neighborhoodMarketingSelected" class="radio" onClick="clearOUHTPMT(this);"/>
+															<input type="radio" name="marketing-time-radio" value="Under3months" data-bind="checked: neighborhoodMarketingSelected" class="radio" onClick="clearOUHTPMT(this);"/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -273,7 +273,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkMT" class="radio" data-bind="checked: neighborhoodMarketingSelected" value="3To6Months" onClick="clearOUHTPMT(this);"	/>
+															<input type="radio" name="marketing-time-radio" class="radio" data-bind="checked: neighborhoodMarketingSelected" value="3To6Months" onClick="clearOUHTPMT(this);"	/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -284,7 +284,7 @@
 													</div>
 													<div style="display:inline-block; width:32%;">
 														<label class="label-checkbox item-content">
-															<input type="radio" name="NBChkMT" value="Over6Months" data-bind="checked: neighborhoodMarketingSelected" class="radio" onClick="clearOUHTPMT(this);"	/>
+															<input type="radio" name="marketing-time-radio" value="Over6Months" data-bind="checked: neighborhoodMarketingSelected" class="radio" onClick="clearOUHTPMT(this);"	/>
 															<div class="item-media">
 																<i class="icon icon-form-checkbox"></i>
 															</div>
@@ -327,7 +327,7 @@
 											<div style="width:19%">
 												<div id="price-radio-group" class="inputCheck">
 													<label class="label-checkbox item-content">
-														<input type="radio" name="NBChkOu" class="radio" value="Low" data-bind="checked: neighborhoodPriceSelected"/>
+														<input type="radio" name="price-radio" class="radio" value="Low" data-bind="checked: neighborhoodPriceSelected"/>
 														<div class="item-media">
 															<i class="icon icon-form-checkbox"></i>
 														</div>
@@ -336,7 +336,7 @@
 														</div>
 													</label>
 														<label class="label-checkbox item-content">
-														<input type="radio" name="NBChkOu" class="radio" value="High" data-bind="checked: neighborhoodPriceSelected"/>
+														<input type="radio" name="price-radio" class="radio" value="High" data-bind="checked: neighborhoodPriceSelected"/>
 														<div class="item-media">
 															<i class="icon icon-form-checkbox"></i>
 														</div>
@@ -345,7 +345,7 @@
 														</div>
 													</label>
 														<label class="label-checkbox item-content">
-														<input type="radio" name="NBChkOu" class="radio" value="Pred" data-bind="checked: neighborhoodPriceSelected" />
+														<input type="radio" name="price-radio" class="radio" value="Pred" data-bind="checked: neighborhoodPriceSelected" />
 														<div class="item-media">
 															<i class="icon icon-form-checkbox"></i>
 														</div>

@@ -11,7 +11,7 @@
 									<div id="contract-radio-group" class="inputCheck" style="width:19%">
 										<div>
 											<label class="label-checkbox item-content" >
-												<input id="didChk" type="radio" name="ContracktChk1" value="Did" data-bind="checked: contractAnalyzeContractChecked" class="radio"/>
+												<input id="didChk" type="radio" name="contract-radio" value="Did" data-bind="checked: contractAnalyzeContractChecked" class="radio"/>
 												<div class="item-media">
 													<i class="icon icon-form-checkbox"></i>
 												</div>
@@ -22,7 +22,7 @@
 										</div>
 										<div>
 											<label class="label-checkbox item-content" >
-												<input id="didnotChk" type="radio" name="ContracktChk1" class="radio" value="Did not" data-bind="checked: contractAnalyzeContractChecked"/>
+												<input id="didnotChk" type="radio" name="contract-radio" class="radio" value="Did not" data-bind="checked: contractAnalyzeContractChecked"/>
 												<div class="item-media">
 													<i class="icon icon-form-checkbox"></i>
 												</div>
@@ -32,18 +32,23 @@
 											</label>
 										</div>
 									</div>
-									<div style="width: 39%;">
+									<div style="width: 75%;">
 										analyze the contract for sale for the subject purchase transaction. Explain the results of the 
 										analysis of the contract for sale or why the analysis was not performed.
 									</div>
-									<div style="width:39%">
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div style="width:100%">
 										<div>Explain</div> 
 										<div>
 											<textarea id="txtDescItmsPaid" class="text-filled" data-bind="value: contractAnalyzeExplain" placeholder="Description"></textarea>
 										</div>
 									</div>
 								</div>
-								
 							</div>
 						</li>
 						<li>
@@ -76,7 +81,7 @@
 										<div id="property-seller-radio-group" class="inputCheck">
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content" >
-													<input id="ownerYesChk" type="radio" name="ContracktChk2" value="Yes" data-bind="checked: contractPropertySellerChecked" class="radio"/>
+													<input type="radio" name="property-seller-radio" value="Yes" data-bind="checked: contractPropertySellerChecked" class="radio"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -87,7 +92,7 @@
 											</div>
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content" >
-													<input id="ownerNoChk" type="radio" name="ContracktChk2" value="No" data-bind="checked: contractPropertySellerChecked" class="radio"/>
+													<input type="radio" name="property-seller-radio" value="No" data-bind="checked: contractPropertySellerChecked" class="radio"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -117,7 +122,7 @@
 										<div id="financial-assistance-radio-group" class="inputCheck">
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content">
-													<input id="confinAsstYes" type="radio" name="ContracktChk3" value="Yes" data-bind="checked: contractFinancialAssistanceChecked" class="radio"/>
+													<input type="radio" id="financial-assistance-radio-dependent" name="financial-assistance-radio" value="Yes" data-bind="checked: contractFinancialAssistanceChecked" class="radio dependent"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -128,7 +133,7 @@
 											</div>
 											<div style="display:inline-block"> 
 												<label class="label-checkbox item-content">
-													<input id="confinAsstNo" type="radio" name="ContracktChk3" value="No" data-bind="checked: contractFinancialAssistanceChecked" class="radio"/>
+													<input type="radio" name="financial-assistance-radio" value="No" data-bind="checked: contractFinancialAssistanceChecked" class="radio"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -142,7 +147,7 @@
 									<div style="width:49%">
 										<div>If Yes, report the total dollar amount and describe the items to be paid.</div> 
 										<div>
-											<textarea id="txtDescItmsPaid" class="text-filled" data-bind="value: contractFinancialAssistanceYes" placeholder="Description"></textarea>
+											<textarea id="financial-assistance-radio-dependent-other" data-bind="value: contractFinancialAssistanceYes" placeholder="Description"></textarea>
 										</div>
 									</div>
 								</div>

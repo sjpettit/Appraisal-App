@@ -11,7 +11,7 @@
 									<div id="analysis-radio-group" class="inputCheck" style="width:14%">
 										<div>
 											<label class="label-checkbox item-content" >
-												<input id="didCheck" type="radio" name="AnalysisChk1" class="radio" value="Did" data-bind="checked: AnalysisAnalyzeChecked"/>
+												<input type="radio" name="analysis-radio" class="radio" value="Did" data-bind="checked: AnalysisAnalyzeChecked"/>
 												<div class="item-media">
 													<i class="icon icon-form-checkbox"></i>
 												</div>
@@ -22,7 +22,7 @@
 										</div>
 										<div>
 											<label class="label-checkbox item-content" >
-												<input id="didnotCheck" type="radio" name="AnalysisChk1" class="radio" value="Did not" data-bind="checked: AnalysisAnalyzeChecked"/>
+												<input type="radio" name="analysis-radio" class="radio" value="Did not" data-bind="checked: AnalysisAnalyzeChecked"/>
 												<div class="item-media">
 													<i class="icon icon-form-checkbox"></i>
 												</div>
@@ -40,21 +40,22 @@
 						</li>
 							<li>
 						<div class="item-content">
-								<div class="item-inner">
-									<div style="width:100%">
-					     <div>
-						Explain the results of the analysis of the budget (adequacy of fees, reserves, etc.), or why the analysis was not performed </div>
-						</div>
-						  <div>
-							<textarea id="txt-analysis-budget" class="text-filled" data-bind="value: AnalysisBudgetExplain" placeholder="Description"></textarea>
-						  </div>
-						</div>
-						</div>
+							<div class="item-inner">
+								<div style="width:100%">
+									<div>
+										Explain the results of the analysis of the budget (adequacy of fees, reserves, etc.), 
+										or why the analysis was not performed
+									</div>
+									<div>
+										<textarea id="txt-analysis-budget" class="text-filled" data-bind="value: AnalysisBudgetExplain" placeholder="Description"></textarea>
+									</div>
+								</div>
+							</div>
 						</li>
 						<li>
 							<div class="item-content">
 								<div class="item-inner" style="border:none">
-								Are there any other fees (other than regular HOA charges) for the use of the project facilities?
+									Are there any other fees (other than regular HOA charges) for the use of the project facilities?
 								</div>
 							</div>
 							<div class="item-content">

@@ -6,6 +6,8 @@ var myApp = new Framework7({
 });
 // Expose Internal DOM library
 var $$ = Dom7;
+
+var mcServer = 'https://morning-caverns-8224.herokuapp.com';
 //Declare global tracking variables
 var userKey;
 var orderArray;
@@ -36,6 +38,11 @@ var lastName;
 var sendData = {};
 var listStatus = 0;
 var formsToLoad;
+var widgetStatus = {
+	status: 'hidden',
+	returnLeft: 0,
+	returnTop: 0
+	}
 
 //initalize login
 login();
@@ -178,7 +185,7 @@ function convertTime(time){
 }
 
 
-  $$(document).on('click', '.load-orders', function(e){
+  $$(document).on('touchend', '.load-orders', function(e){
                     leftView.loadPage('order-page.html');
                     mainView.loadPage('map-page.html');
                     $("#tool-icon-1").addClass("hidden");
@@ -318,11 +325,10 @@ tabPage.getTabPage();
 
 /////////
 $$(document).on('click', '.save', function(e){
-
-sendData.formData = JSON.stringify(ko.mapping.toJS(viewModel));
+	sendData.formData = JSON.stringify(ko.mapping.toJS(viewModel));
 
       $.ajax({
-          url: 'http://localhost:3000/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
+          url: mcServer +'/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
  contentType: 'application/json',
           type: "POST",
           data: JSON.stringify(sendData),
@@ -376,7 +382,7 @@ $$(document).on('click', '.submit', function(e){
 						sendData.formData = JSON.stringify(ko.mapping.toJS(viewModel));
 						sendData.orderStatus = 2;
 							  $.ajax({
-								  url: 'http://localhost:3000/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
+								  url: mcServer+ '/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
 						 contentType: 'application/json',
 								  type: "POST",
 								  data: JSON.stringify(sendData),
@@ -416,7 +422,7 @@ data.state = $("#state").val();
 sendData.formData = JSON.stringify(data);
 sendData.orderStatus = 1;
       $.ajax({
-          url: 'http://localhost:3000/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
+          url: mcServer+ '/api/v1/formData?orderID='+orderID+'&apiKey=f5812148-64e5-45d1-9f44-ce51b5a9b741',
  contentType: 'application/json',
           type: "POST",
           data: JSON.stringify(sendData),
@@ -440,7 +446,7 @@ sendData.orderStatus = 1;
 });
 ///////////
 
-$$(document).on('click', '.show-marker', function(e){
+$$(document).on('touchend', '.show-marker', function(e){
 	
 	$('#widget-bar').css('display', 'inline-block');
 	$('#widget-bar').css('animation', 'pageFromRightToCenter 400ms forwards');
@@ -455,10 +461,10 @@ $$(document).on('click', '.show-marker', function(e){
         prevOrderDiv.children[0].className = "item-content item-link show-marker";
         if(prevOrderDiv == document.getElementById("li-"+this.id)){
 			orderID = currentOrderArray[this.id].orderID;
-            formsToLoad = currentOrderArray[this.id].forms;      
+            formsToLoad = currentOrderArray[this.id].forms;     
             orderID = currentOrderArray[this.id].orderID;
             $.ajax({
-              url: 'http://localhost:3000/api/v1/formData?orderID='+orderID+'&apiKey=ffa13b8d-de71-4c73-a48d-1bcb56bc2386',
+              url: mcServer + '/api/v1/formData?orderID='+orderID+'&apiKey=ffa13b8d-de71-4c73-a48d-1bcb56bc2386',
 			  beforeSend: function(xhr) {
 				myApp.showPreloader();
 				xhr.overrideMimeType("text/plain; charset=x-user-defined");
@@ -480,6 +486,7 @@ $$(document).on('click', '.show-marker', function(e){
 					}
 				}
               }
+				//console.log(ko.mapping.toJS(viewModel));
 				$('#widget-bar').css('display', 'none');
 				$('#widget-bar').css('animation', 'none');
 				leftView.loadPage('order-info.html');
@@ -551,12 +558,10 @@ $$(document).on('click', '.show-marker', function(e){
 					{
 						propertyImage='';
 					}
-					zillowPopupHTML = '<div class="widget-popup ">'+
-									'<div class="content-block">'+
-										'<a href="#" id="widget-close-link" style="position:absolute; left:5px; top:5px; color:red;">X</a>'+
-										'<center><img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_200x50.gif" width="200" height="50" alt="Zillow Real Estate Search" /></center>'+
+					zillowPopupHTML = '<div class="content-block">'+
+										'<center><a href="http://www.zillow.com" target="_blank"><img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_200x50.gif" width="200" height="50" alt="Zillow Real Estate Search" /></a></center>'+
 							  '<ul>'+
-								((jsonRequest.finsihedSqFt) ? ( '<li>Finished Sqare Footage: '+ jsonRequest.finsihedSqFt +'</li>') : '')+
+								((jsonRequest.finishedSqFt) ? ( '<li>Finished Sqare Footage: '+ jsonRequest.finishedSqFt +'</li>') : '')+
 								((jsonRequest.totalRooms) ? ( '<li>Total Rooms: '+ jsonRequest.totalRooms +'</li>'): '')+
 								((jsonRequest.bedrooms) ? ('<li>Bedrooms: '+ jsonRequest.bedrooms +'</li>'): '')+
 								((jsonRequest.bathrooms) ? ('<li>Bathrooms: '+ jsonRequest.bathrooms +'</li>'): '')+
@@ -566,20 +571,17 @@ $$(document).on('click', '.show-marker', function(e){
 								((jsonRequest.taxAssessmentDate) ? ('<li>Tax Assessment Year: '+ jsonRequest.taxAssessmentDate +'</li>'): '')+
 							  '</ul>'+
 							  '<center>'+propertyImage+'</center>'+
-							  '</div>'+
+							  '<center>See more details for <a href="'+jsonRequest.links.homedetails+'" style="color:blue;">'+currentOrder.order_addres+'</a> on Zillow</center>'+
 							  '</div>';
 					
 					$('#zillow-widget').click(function(){
 						createWidgetPopup(zillowPopupHTML, 'zillow-widget');
 						//myApp.popup(popupHTML);
 					});
-					avmPopupHTML = '<div class="widget-popup ">'+
+					var avmPopupHTML = '<div class="widget-popup ">'+
 									'<div class="content-block">'+
-									'<a href="#" id="widget-close-link" style="position:absolute; left:5px; top:5px; color:red;">X</a>'+
 										'<center>AVM</center>'+
-							  '<ul>'+
-								'<li>AVM widget not available in this package</li>'+
-							  '</ul>'+
+								'<center>AVM widget not available in this package</center>'+
 							  '</div>'+
 							  '</div>';
 					$('#avm-widget').click(function(){
@@ -587,11 +589,8 @@ $$(document).on('click', '.show-marker', function(e){
 					});
 					var fgPopupHTML = '<div class="widget-popup ">'+
 									'<div class="content-block">'+
-									'<a href="#" id="widget-close-link" style="position:absolute; left:5px; top:5px; color:red;">X</a>'+
 										'<center>Fraud Guard</center>'+
-							  '<ul>'+
-								'<li>Fraud Guard widget not available in this package</li>'+
-							  '</ul>'+
+								'<center>Fraud Guard widget not available in this package</center>'+
 							  '</div>'+
 							  '</div>';
 					$('#fraud-guard-widget').click(function(){
@@ -601,17 +600,32 @@ $$(document).on('click', '.show-marker', function(e){
 			}
 			else
 			{
-				zillowPopupHTML = '<div class="widget-popup">'+
-								'<div class="content-block">'+
-							'<center><img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_200x50.gif" width="200" height="50" alt="Zillow Real Estate Search" /></center>'+
-							  '<ul>'+
-								'<li>There is no Zillow information for this address</li>'+
-							  '</ul>'+
-							  '<center><a href="#" class="close-popup" style="position:absolute; bottom:0;">Close popup</a><center>'+
+				zillowPopupHTML = '<div class="widget-popup ">'+
+									'<div class="content-block">'+
+										'<center><a href="http://www.zillow.com" target="_blank"><img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_200x50.gif" width="200" height="50" alt="Zillow Real Estate Search" /></a></center>'+
+								'<center>There is no Zillow information for this address</center>'+
 							  '</div>'+
 							  '</div>';
 				$('#zillow-widget').click(function(){
 					createWidgetPopup(zillowPopupHTML, 'zillow-widget');
+				});
+				var avmPopupHTML = '<div class="widget-popup ">'+
+									'<div class="content-block">'+
+										'<center>AVM</center>'+
+								'<center>AVM widget not available in this package</center>'+
+							  '</div>'+
+							  '</div>';
+				$('#avm-widget').click(function(){
+					createWidgetPopup(avmPopupHTML, 'avm-widget');
+				});
+				var fgPopupHTML = '<div class="widget-popup ">'+
+								'<div class="content-block">'+
+									'<center>Fraud Guard</center>'+
+							'<center>Fraud Guard widget not available in this package</center>'+
+						  '</div>'+
+						  '</div>';
+				$('#fraud-guard-widget').click(function(){
+					createWidgetPopup(fgPopupHTML, 'fraud-guard-widget');
 				});
 			}
 			zillowPicDeffered.resolve();
@@ -778,7 +792,7 @@ myApp.onPageInit('main-page-1', function(page) {
     document.getElementById('view-navbar').className = "view view-navbar";
     document.getElementById('view-toolbar').className = "view view-toolbar";
     $.ajax({
-            url: 'http://localhost:3000/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus='+listStatus,       
+            url: mcServer+ '/api/v1/getOrderDetail?orderPartyID='+userKey+'&apiKey=1dca7720-395c-11e4-916c-0800200c9a66&orderStatus='+listStatus,       
             dataType:"text",
             beforeSend: function(xhr) {
                 myApp.showPreloader();
@@ -959,7 +973,7 @@ function login() {
 $$(".index-page").addClass(document.body.className);
     var modal = myApp.modalLogin('Enter your username and password', 'Login: ', function(username, password) {
         $.ajax({
-                url: "http://localhost:3000/api/v1/checkUserCredential?userName=" + username + '&password=' + password + '&apiKey=df5cb700-395b-11e4-916c-0800200c9a66',
+                url: mcServer+ "/api/v1/checkUserCredential?userName=" + username + '&password=' + password + '&apiKey=df5cb700-395b-11e4-916c-0800200c9a66',
                 beforeSend: function(xhr) {
                     myApp.showPreloader();
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
@@ -1051,31 +1065,44 @@ function scrollTo(hash)
 
 function createWidgetPopup(widgetHtml, widgetId)
 {
-	//$('body').append('<div id="widget-overlay" class="popup-overlay modal-overlay-visible"></div>');
-	
-	var originLeft = $('#'+widgetId).position().left+30;
-	var originTop = $('#'+widgetId).position().top+30;
-	//alert(originLeft+' '+originTop);
-	var endLeft = '50%';
-	var endTop = 0+60;
-	
-	$('#widget-popup-container').css({'left':originLeft, 'top':originTop, 'opacity':'0', 'display':'inline-block', 'width':'0', 'height':'0'});
-	$('#widget-popup-container').html(widgetHtml);
-	
-	$('#widget-popup-container').animate({
-		opacity: 1,
-		left: endLeft,
-		top: endTop,
-		width: '40%',
-		height: '40%',
-	},1000);
-	
-	$('#widget-close-link').click(function(){
-		returnWidgetPopup('widget-popup-container', originLeft, originTop);
-	});
-	/*$('body').click(function(){
-		returnWidgetPopup('widget-popup-container', originLeft, originTop);
-	});*/
+	if(widgetStatus.status == 'hidden')
+	{
+		//$('body').append('<div id="widget-overlay" class="popup-overlay modal-overlay-visible"></div>');
+		
+		var originLeft = $('#'+widgetId).position().left+30;
+		var originTop = $('#'+widgetId).position().top+30;
+		//alert(originLeft+' '+originTop);
+		var endLeft = '48%';
+		var endTop = 0+60;
+		
+		$('#widget-popup-container').css({'left':originLeft, 'top':originTop, 'opacity':'0', 'display':'inline-block', 'width':'0', 'height':'0'});
+		$('#widget-popup-container-content').html(widgetHtml);
+		
+		$('#widget-popup-container').animate({
+			opacity: 1,
+			left: endLeft,
+			top: endTop,
+			width: '45%',
+			height: '50%',
+		},750);
+		widgetStatus = {
+			status:'shown',
+			returnLeft: originLeft,
+			returnTop: originTop
+			};
+		
+		$('#widget-close-link').unbind();
+		$('#widget-close-link').click(function(){
+			returnWidgetPopup('widget-popup-container', originLeft, originTop);
+		});
+		/*$('body').click(function(){
+			returnWidgetPopup('widget-popup-container', originLeft, originTop);
+		});*/
+	}
+	else
+	{
+		returnWidgetPopup('widget-popup-container', widgetStatus.returnLeft, widgetStatus.returnTop);
+	}
 }
 
 function returnWidgetPopup(popupId, endLeft, endTop)
@@ -1087,5 +1114,12 @@ function returnWidgetPopup(popupId, endLeft, endTop)
 		width: 0,
 		height: 0,
 	});
+	widgetStatus.status = 'hidden';
 	//$('#widget-overlay').remove();
 }	
+
+function fadeInFirstComment()
+{
+	$('.timeline').children().first().css('opacity','0'); 
+	$('.timeline').children().first().animate({opacity:1},1000);
+}

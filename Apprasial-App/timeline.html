@@ -2,7 +2,8 @@
 <script type="text/javascript" src="js/timeline.js"></script>
 
 <div style="overflow:auto; height:50%; width:100%; position:fixed;">
-	<ul class="timeline" data-bind="foreach: notesComments">
+	<a href="#" id="timeline-hash"></a>
+	<ul class="timeline" data-bind="foreach: {data: notesComments, afterRender: fadeInFirstComment}">
 		<li>
 			<div class="direction-r" >
 				<div class="flag-wrapper">
@@ -14,7 +15,7 @@
 		</li>
 	</ul>
 </div>
-<div class="content-block" style="bottom:0; left:0; right:0; position:absolute;">
+<div class="content-block" style="bottom:0; left:0; right:0; position:fixed;">
 	<div class="list-block" style="padding:0; margin:0;">
 		<ul>
 			<li>
@@ -33,7 +34,7 @@
 					<div class="item-inner">
 						<div style="width:33%"></div>
 						<div style="width:33%">
-							<a href="#" class="button button-big" data-bind="click: function(data, event) { notesAddComment(firstName +' '+lastName, getCurrentDateTime(), $('#new-comment').val(), data, event) }">Add Comment</a>
+							<a href="#" class="button button-big" data-bind="click: function(data, event) { notesAddComment(firstName +' '+lastName, getCurrentDateTime(), $('#new-comment').val(), data, event) }" onclick="scrollTo('timeline-hash');">Add Comment</a>
 						</div>
 						<div style="width:33%"></div>
 					</div>

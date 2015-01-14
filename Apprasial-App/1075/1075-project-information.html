@@ -11,7 +11,7 @@
 									<div style="width:100%">
 									<div>Data Source(s) for project information</div>
 										<div>
-											<input type="text" id="data-sources-for-project" data-bind="value: informationDataSource" placeholder="Date Sources"/>
+											<input type="text" id="data-sources-for-project" class="text-filled" data-bind="value: informationDataSource" placeholder="Date Sources"/>
 										</div>
 									</div>
 								</div>
@@ -352,7 +352,7 @@
 										<div>
 											<div style="display:inline-block; width:33%">
 												<label class="label-checkbox item-content">
-													<input type="radio" name="properties" class="radio" value="Principle-Residence" data-bind="checked: informationOccupancyChecked"/>
+													<input type="radio" name="property-occupancy-radio" class="radio" value="Principle-Residence" data-bind="checked: informationOccupancyChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -363,7 +363,7 @@
 											</div>
 											<div style="display:inline-block; width:33%">
 												<label class="label-checkbox item-content">
-													<input type="radio" name="properties" class="radio" value="SecondHome" data-bind="checked: informationOccupancyChecked"/>
+													<input type="radio" name="property-occupancy-radio" class="radio" value="SecondHome" data-bind="checked: informationOccupancyChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -374,7 +374,7 @@
 											</div>
 											<div style="display:inline-block; width:33%">
 												<label class="label-checkbox item-content">
-													<input type="radio" name="properties" class="radio" value="Tenant" data-bind="checked: informationOccupancyChecked"/>
+													<input type="radio" name="property-occupancy-radio" class="radio" value="Tenant" data-bind="checked: informationOccupancyChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -398,7 +398,7 @@
 										<div id="controller-of-HOA-radio-group" class="inputCheck">
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content" >
-													<input id="ownerYesChk" type="radio" class="radio" name="HOA-developer" value="Yes" data-bind="checked: informationHoaDeveloperChecked"/>
+													<input type="radio" class="radio" name="controller-of-HOA-radio" value="Yes" data-bind="checked: informationHoaDeveloperChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -409,7 +409,7 @@
 											</div>
 											<div style="display:inline-block">
 												<label class="label-checkbox item-content" >
-													<input id="ownerNoChk" type="radio" name="HOA-developer" class="radio" value="No" data-bind="checked: informationHoaDeveloperChecked"/>
+													<input type="radio" name="controller-of-HOA-radio" class="radio" value="No" data-bind="checked: informationHoaDeveloperChecked"/>
 													<div class="item-media">
 														<i class="icon icon-form-checkbox"></i>
 													</div>
@@ -575,12 +575,12 @@
 									<div style="width:49%">
 										<select id="common-elements-leased" class="dropdown" data-bind="value: informationCommonElementsSelected" >
 											<option>Select</option>
-											<option>Yes</option>
+											<option id="common-elements-leased-dependent" class="dependent">Yes</option>
 											<option>No</option>
 											</select>
 									</div>
 									<div class="item-input" style="width:49%">
-										<input type="text" class="text-filled" id="common-elements-leased-yes" data-bind="value: informationCommonElementsYes" placeholder="If Yes, describe the rental terms and options." />
+										<input type="text" id="common-elements-leased-dependent-other" data-bind="value: informationCommonElementsYes" placeholder="If Yes, describe the rental terms and options." />
 									</div>
 								</div>
 							</div>
@@ -596,12 +596,12 @@
 									<div style="width:49%">
 										<select id="ground-rent" class="dropdown" data-bind="value: informationRentSelected">
 											<option>Select</option>
-											<option>Yes</option>
+											<option id="ground-rent-dependent" class="dependent">Yes</option>
 											<option>No</option>
 											</select>
 									</div>
 									<div class="item-input" style="width:49%">
-										<input type="text" id="ground-rent-yes" class="text-filled" data-bind="value: informationRentYes" placeholder="If Yes, $    per year (describe terms and conditions)." />
+										<input type="text" id="ground-rent-dependent-other" data-bind="value: informationRentYes" placeholder="If Yes, $ per year (describe terms and conditions)." />
 									</div>
 								</div>
 							</div>
@@ -618,11 +618,11 @@
 										<select id="parking-facilities" class="dropdown" data-bind="value: informationSizeTypeSelected">
 											<option>Select</option>
 											<option>Yes</option>
-											<option>No</option>
+											<option id="parking-facilities-dependent" class="dependent">No</option>
 											</select>
 									</div>
 									<div class="item-input" style="width:49%">
-										<input type="text" id="parking-facilities-no" class="text-filled" data-bind="value: informationSizeTypeNo" placeholder="If No, describe and comment on the effect on value and marketability." />
+										<input type="text" id="parking-facilities-dependent-other" data-bind="value: informationSizeTypeNo" placeholder="If No, describe and comment on the effect on value and marketability." />
 									</div>
 								</div>
 							</div>

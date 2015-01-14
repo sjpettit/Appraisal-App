@@ -3,10 +3,11 @@
 	window.tabPage = function(){
     
     var tabPage = this;
+    var mcServer = 'https://morning-caverns-8224.herokuapp.com';
     
     var myDropzone;
 			 tabPage.processQueue = function(){
-			  myDropzone.processQueue();
+			  //myDropzone.processQueue();
 			}
 
 		tabPage.getTabPage = function(){
@@ -22,7 +23,7 @@
             eval($("#form-select").val());
             myApp.showPreloader();
              disableFeilds();
-            window.setTimeout( function(){
+            //window.setTimeout( function(){
             	tabPage.getPictureList();
               tabTracking = numOfTabs;
               tabLength = $("#tab-selector").children().length-2;
@@ -30,18 +31,18 @@
                     selector: "notes",
                     skin:"custom"
                  });
-			reapplyBindings();
-              myDropzone = new Dropzone("#myDropzone", { 
-              url: "http://localhost:3000/api/v1/uploadFile?apiKey=2AC86B2C-C32B5-7EA-E6DC-26D35519C00t&orderID="+orderID,
+			         //reapplyBindings();
+              /*myDropzone = new Dropzone("#myDropzone", { 
+              url: mcServer+"/api/v1/uploadFile?apiKey=2AC86B2C-C32B5-7EA-E6DC-26D35519C00t&orderID="+orderID,
               init: function () {
                 this.on("complete", function (file) {
                   tabPage.getPictureList();
                 });
               }
-            });
+            });*/
             
-            myApp.hidePreloader();
-          },200)
+           
+          //},200)
 
         })
         
@@ -64,21 +65,22 @@
                 skin:"custom"
              });
             //tabPage.loadSlider();
-        reapplyBindings();
+            //reapplyBindings();
          $("#form-select").html("");
             for(var i = 0; i<formsToLoad.length;i++){
               $("#form-select").append('<option value="load'+formsToLoad[i]+'();">'+formsToLoad[i]+'</option>');
             }
 
         
-        myDropzone = new Dropzone("#myDropzone", { 
-          url: "http://localhost:3000/api/v1/uploadFile?apiKey=2AC86B2C-C32B5-7EA-E6DC-26D35519C00t&orderID="+orderID,
+        /*myDropzone = new Dropzone("#myDropzone", { 
+          url: mcServer+"/api/v1/uploadFile?apiKey=2AC86B2C-C32B5-7EA-E6DC-26D35519C00t&orderID="+orderID,
           init: function () {
             this.on("complete", function (file) {
               tabPage.getPictureList();
             });
           }
-        });
+        });*/
+          
         myApp.hidePreloader();
       },500);
       });
@@ -139,7 +141,7 @@
       
       tabPage.getPictureList = function(){
         $.ajax({
-                url: 'http://localhost:3000/api/v1/uploadedFileList?apiKey=50d30b77-dbae-491b-81b9-c957c8a6d23d&orderID='+ orderID,
+                url: mcServer+'/api/v1/uploadedFileList?apiKey=50d30b77-dbae-491b-81b9-c957c8a6d23d&orderID='+ orderID,
                   beforeSend: function(xhr) {
                       myApp.showPreloader();
                       xhr.overrideMimeType("text/plain; charset=x-user-defined");
@@ -154,10 +156,11 @@
       
       }
       
-      function getPictures(picList){
+      /*function getPictures(picList){
         $("#images").html("");
         if(picList.message === "IMGLST"){
            $("#numPhotos").html(picList.list.length);
+		   //console.log(picList);
           for(var i = 0; i<picList.list.length; i++){
             $("#images").append(
             '<div class="slider-slide">'+
@@ -173,7 +176,26 @@
           myApp.hidePreloader();
          }
         
-      }
+      }*/
+		function getPictures(picList){
+			$("#images").html("");
+			if(picList.message === "IMGLST"){
+			   $("#numPhotos").html(picList.list.length);
+			  for(var i = 0; i<picList.list.length; i++){
+  				//console.log(picList.list[i]);
+  				$("#images").append(
+  				'<div class="slider-slide">'+
+  				  '<img id="image-'+i+'" class="slider-image image-style" src="' + picList.list[i] + '"/>'+
+  				'</div>'
+  				);
+			  }
+			  tabPage.resizeImages(picList.list.length);
+			  myApp.hidePreloader();
+			  tabPage.loadSlider();
+			 }else{
+			  myApp.hidePreloader();
+			 }
+		}
       
       /////////
       //Load required pages for form
@@ -204,7 +226,7 @@
                     "1004/1004-site.html", "1004/1004-improvements.html", "1004/1004-sales-comparison-approach.html",
                     "1004/1004-reconciliation.html", "timeline.html", "1004/1004-cost-approach.html",
                     "1004/1004-income.html", "1004/1004-pud-information.html", "1004/1004-appraiser.html", 
-                    "upload.html", "photo-slider.html"];
+                    "camera.html", "photo-slider.html"];
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Site", "Improvements", "Sales Comp. App.",
                         "Reconciliation", "Notes", "Cost App.",
@@ -219,13 +241,22 @@
       
         loadTabs(pages, tabNames, imageIcons);
       }
+      /*function loadcamera()
+      {
+        var pages = ["camera.html"];
+        var tabNames = ["Camera"];
+                        
+        var imageIcons = ["icon-camera"];
+      
+        loadTabs(pages, tabNames, imageIcons);
+      }*/
       function load1004c()
       {
         var pages = ["1004c/1004c-subject.html", "1004c/1004c-contract.html", "1004c/1004c-neighborhood.html",
                     "1004c/1004c-site.html", "1004c/1004c-hud-data-plate.html", "1004c/1004c-improvements.html",
                     "1004c/1004c-cost-approach.html", "1004/1004-sales-comparison-approach.html", "1004/1004-reconciliation.html",
                     "timeline.html", "1004/1004-income.html", "1004/1004-pud-information.html", 
-                    "1004/1004-appraiser.html","upload.html", "photo-slider.html"];
+                    "1004/1004-appraiser.html","camera.html", "photo-slider.html"];
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Site", "HUD Data Plate", "Improvements",
                         "Cost App.", "Sales Comp. App.", "Reconciliation",
@@ -243,7 +274,7 @@
       function load1004d()
       {
         var pages = ["1004d/1004d-subject.html", "1004d/1004d-summary-appraisal-update-report.html", "1004d/1004d-certification-of-completion.html",
-                    "1004d/1004d-signatures.html","timeline.html","upload.html", 
+                    "1004d/1004d-signatures.html","timeline.html","camera.html", 
 					"photo-slider.html"];
         var tabNames = ["Subject", "Sum. App. Upd. Rep.", "Cert. of Comp.",
                         "Signatures", "Notes", "Upload", 
@@ -257,7 +288,7 @@
       }
 	  function load1007()
       {
-        var pages = ["1007/1007-initial.html", "timeline.html", "upload.html", 
+        var pages = ["1007/1007-initial.html", "timeline.html", "camera.html", 
 						"photo-slider.html"];
         var tabNames = ["Subject", "Notes", "Upload", 
 						"Photos"];
@@ -273,7 +304,7 @@
                     "1004/1004-site.html", "2055/2055-improvements.html", "1004/1004-sales-comparison-approach.html",
                     "1004/1004-reconciliation.html", "timeline.html", "1004/1004-cost-approach.html",
                     "1004/1004-income.html", "1004/1004-pud-information.html", "1004/1004-appraiser.html", 
-                    "upload.html", "photo-slider.html"];
+                    "camera.html", "photo-slider.html"];
                     
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Site", "Improvements", "Sales Comp. App.",
@@ -296,7 +327,7 @@
                     "1025/1025-subject-rent-schedule.html", "1025/1025-prior-sale-history.html", "1025/1025-sales-comparison-approach.html",
                     "1004/1004-income.html", "1004/1004-reconciliation.html", "timeline.html",
                     "1004/1004-cost-approach.html", "1004/1004-pud-information.html", "1004/1004-appraiser.html",
-                    "upload.html", "photo-slider.html"];
+                    "camera.html", "photo-slider.html"];
                     
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Site", "Improvements", "Comp. Rent Data", 
@@ -316,11 +347,11 @@
       }
       function load1073()
       {
-        var pages = ["1073/1073-subject.html", "1004/1004-contract.html", "1004/1004-neighborhood.html",
+        var pages = ["1073/1073-subject.html", "1073/1073-contract.html", "1073/1073-neighborhood.html",
                     "1073/1073-project-site.html", "1073/1073-project-information.html", "1073/1073-project-analysis.html",
                     "1073/1073-unit-description.html", "1075/1075-prior-sale-history.html", "1073/1073-sales-comparison-approach.html",
-                    "1004/1004-income.html", "1073/1073-reconciliation.html", "1004/1004-appraiser.html", 
-                    "timeline.html", "upload.html", "photo-slider.html"];
+                    "1073/1073-income.html", "1073/1073-reconciliation.html", "1073/1073-appraiser.html", 
+                    "timeline.html", "camera.html", "photo-slider.html"];
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Project Site", "Proj. Info.", "Proj. Analysis",
                         "Unit Desc.", "Prior Sale His.", "Sales Comp. App.",
@@ -337,11 +368,11 @@
       }
       function load1075()
       {
-        var pages = ["1075/1075-subject.html", "1004/1004-contract.html", "1004/1004-neighborhood.html",
-                    "1075/1075-project-site.html", "1075/1075-project-information.html", "1075/1075-project-analysis.html",
+        var pages = ["1073/1073-subject.html", "1075/1075-contract.html", "1075/1075-neighborhood.html",
+                    "1073/1073-project-site.html", "1075/1075-project-information.html", "1075/1075-project-analysis.html",
                     "1075/1075-unit-improvements.html", "1075/1075-prior-sale-history.html", "1075/1075-sales-comparison-approach.html",
-                    "1004/1004-income.html", "1075/1075-reconciliation.html", "1004/1004-appraiser.html", 
-                    "timeline.html", "upload.html", "photo-slider.html"];
+                    "1075/1075-income.html", "1075/1075-reconciliation.html", "1075/1075-appraiser.html", 
+                    "timeline.html", "camera.html", "photo-slider.html"];
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Project Site", "Proj. Info.", "Proj. Analysis",
                         "Unit Improv.", "Prior Sale His.", "Sales Comp. App.",
@@ -367,7 +398,7 @@
 		});
 	}
 	
-  function loadTabs(pages, tabNames, imageIcons)
+    function loadTabs(pages, tabNames, imageIcons)
   {
     //clear divs
     $('#tab-selector').html("");
@@ -375,11 +406,20 @@
     
     //fill navigation bar and tabs
     $('#tab-selector').append('<div><a href="" class="prev invisible"><i class="icon icon-prev"></i></a></div>');
+	var promises = [];
     for(var x=0; x<pages.length; x++)
     {
+		promises.push($.Deferred());
+		//console.log(promises);
       $('#tab-selector').append('<a href="#tab-'+(x+1)+'" id="tab-icon-'+(x+1)+'" class="tab-link"><i class="icon '+imageIcons[x]+'">	</i><span class="tabbar-label">'+tabNames[x]+'</span></a>');
       $('#tabs-container').append('<div id="tab-'+(x+1)+'" class="tab"></div>');
-      $("#tab-"+(x+1)).load(pages[x]);
+	  (function(x){
+		$("#tab-"+(x+1)).load(pages[x], function(){
+			//console.log(promises[x]);
+			promises[x].resolve();
+		  });
+	  })(x);
+	  
       if(x > 3)
       {
         $('#tab-icon-'+(x+1)).addClass('hidden');
@@ -391,6 +431,11 @@
     $('#tab-selector').append('<div><a href="" class="link next"><i class="icon icon-next"></i></a></div>');
     $('#tab-icon-1').addClass('active');
     $('#tab-1').addClass('active');
+	$.when.apply($, promises).then(function(){
+		//console.log(promises);
+		reapplyBindings();
+		 myApp.hidePreloader();
+	});
   }
   
 })();
