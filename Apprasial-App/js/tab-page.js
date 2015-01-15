@@ -13,7 +13,15 @@
 		tabPage.getTabPage = function(){
 
 			myApp.onPageInit('tab-page', function(page) {
-
+        $("#view-main").on( "swipeleft", function( event ) { 
+          var currentTab = $(".tab.active").attr('id').substring(4,$(".tab.active").attr('id').length);
+          var nextTab = parseInt(currentTab)+1;
+          console.log(document.getElementsByClassName("tab-link"));
+          console.log(document.getElementById("tab-icon-"+nextTab));
+          if(document.getElementById("tab-icon-"+nextTab)){
+             document.getElementById("tab-icon-"+nextTab).click();
+          }
+      } );
         document.getElementById('view-main').className = "view view-main navbar-through frame-shift"
         
         //read file and append to tab-page
@@ -87,7 +95,7 @@
 
       /////////
       tabPage.resizeImages = function(numPhotos){
-        var containerHeight = parseInt($('#tabs-container').height())-60;
+        var containerHeight = parseInt($(window).height())-(68*4);
         var containerWidth = parseInt($('#tabs-container').width());
         var theImages = [];
         var imgs = [];
@@ -106,15 +114,14 @@
               if(widthDiff>0){
                 imgs[this.getAttribute("id")].width(containerWidth);
                 imgs[this.getAttribute("id")].height(containerWidth*(height/width));
-                imgs[this.getAttribute("id")].css("top",(containerHeight-containerWidth*(height/width))/2);
-
-
+                //imgs[this.getAttribute("id")].css("top",(containerHeight-containerWidth*(height/width))/2);
               }else{
                 imgs[this.getAttribute("id")].css("top",(-1*heightDiff/2));
                 imgs[this.getAttribute("id")].css("left",(-1*widthDiff/2));
 
               }
             }else{
+              
               if(heightDiff>0){
                 imgs[this.getAttribute("id")].height(containerHeight);
                 imgs[this.getAttribute("id")].width(containerHeight *(width/height));
@@ -226,7 +233,7 @@
                     "1004/1004-site.html", "1004/1004-improvements.html", "1004/1004-sales-comparison-approach.html",
                     "1004/1004-reconciliation.html", "timeline.html", "1004/1004-cost-approach.html",
                     "1004/1004-income.html", "1004/1004-pud-information.html", "1004/1004-appraiser.html", 
-                    "camera.html", "photo-slider.html"];
+                    "upload.html", "photo-slider.html"];
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Site", "Improvements", "Sales Comp. App.",
                         "Reconciliation", "Notes", "Cost App.",
@@ -243,7 +250,7 @@
       }
       /*function loadcamera()
       {
-        var pages = ["camera.html"];
+        var pages = ["upload.html"];
         var tabNames = ["Camera"];
                         
         var imageIcons = ["icon-camera"];
@@ -256,7 +263,7 @@
                     "1004c/1004c-site.html", "1004c/1004c-hud-data-plate.html", "1004c/1004c-improvements.html",
                     "1004c/1004c-cost-approach.html", "1004/1004-sales-comparison-approach.html", "1004/1004-reconciliation.html",
                     "timeline.html", "1004/1004-income.html", "1004/1004-pud-information.html", 
-                    "1004/1004-appraiser.html","camera.html", "photo-slider.html"];
+                    "1004/1004-appraiser.html","upload.html", "photo-slider.html"];
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Site", "HUD Data Plate", "Improvements",
                         "Cost App.", "Sales Comp. App.", "Reconciliation",
@@ -274,7 +281,7 @@
       function load1004d()
       {
         var pages = ["1004d/1004d-subject.html", "1004d/1004d-summary-appraisal-update-report.html", "1004d/1004d-certification-of-completion.html",
-                    "1004d/1004d-signatures.html","timeline.html","camera.html", 
+                    "1004d/1004d-signatures.html","timeline.html","upload.html", 
 					"photo-slider.html"];
         var tabNames = ["Subject", "Sum. App. Upd. Rep.", "Cert. of Comp.",
                         "Signatures", "Notes", "Upload", 
@@ -288,7 +295,7 @@
       }
 	  function load1007()
       {
-        var pages = ["1007/1007-initial.html", "timeline.html", "camera.html", 
+        var pages = ["1007/1007-initial.html", "timeline.html", "upload.html", 
 						"photo-slider.html"];
         var tabNames = ["Subject", "Notes", "Upload", 
 						"Photos"];
@@ -304,7 +311,7 @@
                     "1004/1004-site.html", "2055/2055-improvements.html", "1004/1004-sales-comparison-approach.html",
                     "1004/1004-reconciliation.html", "timeline.html", "1004/1004-cost-approach.html",
                     "1004/1004-income.html", "1004/1004-pud-information.html", "1004/1004-appraiser.html", 
-                    "camera.html", "photo-slider.html"];
+                    "upload.html", "photo-slider.html"];
                     
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Site", "Improvements", "Sales Comp. App.",
@@ -327,7 +334,7 @@
                     "1025/1025-subject-rent-schedule.html", "1025/1025-prior-sale-history.html", "1025/1025-sales-comparison-approach.html",
                     "1004/1004-income.html", "1004/1004-reconciliation.html", "timeline.html",
                     "1004/1004-cost-approach.html", "1004/1004-pud-information.html", "1004/1004-appraiser.html",
-                    "camera.html", "photo-slider.html"];
+                    "upload.html", "photo-slider.html"];
                     
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Site", "Improvements", "Comp. Rent Data", 
@@ -351,7 +358,7 @@
                     "1073/1073-project-site.html", "1073/1073-project-information.html", "1073/1073-project-analysis.html",
                     "1073/1073-unit-description.html", "1075/1075-prior-sale-history.html", "1073/1073-sales-comparison-approach.html",
                     "1073/1073-income.html", "1073/1073-reconciliation.html", "1073/1073-appraiser.html", 
-                    "timeline.html", "camera.html", "photo-slider.html"];
+                    "timeline.html", "upload.html", "photo-slider.html"];
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Project Site", "Proj. Info.", "Proj. Analysis",
                         "Unit Desc.", "Prior Sale His.", "Sales Comp. App.",
@@ -372,7 +379,7 @@
                     "1073/1073-project-site.html", "1075/1075-project-information.html", "1075/1075-project-analysis.html",
                     "1075/1075-unit-improvements.html", "1075/1075-prior-sale-history.html", "1075/1075-sales-comparison-approach.html",
                     "1075/1075-income.html", "1075/1075-reconciliation.html", "1075/1075-appraiser.html", 
-                    "timeline.html", "camera.html", "photo-slider.html"];
+                    "timeline.html", "upload.html", "photo-slider.html"];
         var tabNames = ["Subject", "Contract", "Neighborhood",
                         "Project Site", "Proj. Info.", "Proj. Analysis",
                         "Unit Improv.", "Prior Sale His.", "Sales Comp. App.",

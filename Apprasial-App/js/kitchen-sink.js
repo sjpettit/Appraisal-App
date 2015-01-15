@@ -185,7 +185,7 @@ function convertTime(time){
 }
 
 
-  $$(document).on('touchend', '.load-orders', function(e){
+  $$(document).on('click', '.load-orders', function(e){
                     leftView.loadPage('order-page.html');
                     mainView.loadPage('map-page.html');
                     $("#tool-icon-1").addClass("hidden");
@@ -446,7 +446,7 @@ sendData.orderStatus = 1;
 });
 ///////////
 
-$$(document).on('touchend', '.show-marker', function(e){
+$$(document).on('click', '.show-marker', function(e){
 	
 	$('#widget-bar').css('display', 'inline-block');
 	$('#widget-bar').css('animation', 'pageFromRightToCenter 400ms forwards');
