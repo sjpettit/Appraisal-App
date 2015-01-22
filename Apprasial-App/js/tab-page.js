@@ -16,10 +16,26 @@
         $("#view-main").on( "swipeleft", function( event ) { 
           var currentTab = $(".tab.active").attr('id').substring(4,$(".tab.active").attr('id').length);
           var nextTab = parseInt(currentTab)+1;
-          console.log(document.getElementsByClassName("tab-link"));
+          console.log(document.getElementsByClassName("tab-link")[3]);
           console.log(document.getElementById("tab-icon-"+nextTab));
+          if(document.getElementsByClassName("tab-link")[3] == document.getElementById("tab-icon-"+nextTab)){
+              document.getElementById("icon-next").click();
+          }
           if(document.getElementById("tab-icon-"+nextTab)){
              document.getElementById("tab-icon-"+nextTab).click();
+          }
+      } );
+
+      $("#view-main").on( "swiperight", function( event ) { 
+          var currentTab = $(".tab.active").attr('id').substring(4,$(".tab.active").attr('id').length);
+          var prevTab = parseInt(currentTab)-1;
+          console.log(document.getElementsByClassName("tab-link")[0]);
+          console.log(document.getElementById("tab-icon-"+prevTab));
+          if(document.getElementsByClassName("tab-link")[0] == document.getElementById("tab-icon-"+prevTab)){
+              document.getElementById("icon-prev").click();
+          }
+          if(document.getElementById("tab-icon-"+prevTab)){
+             document.getElementById("tab-icon-"+prevTab).click();
           }
       } );
         document.getElementById('view-main').className = "view view-main navbar-through frame-shift"
@@ -412,7 +428,7 @@
     $('#tabs-container').html("");
     
     //fill navigation bar and tabs
-    $('#tab-selector').append('<div><a href="" class="prev invisible"><i class="icon icon-prev"></i></a></div>');
+    $('#tab-selector').append('<div><a href="" class="prev invisible"><i id="icon-prev" class="icon icon-prev"></i></a></div>');
 	var promises = [];
     for(var x=0; x<pages.length; x++)
     {
@@ -435,7 +451,7 @@
     }
     $('#tab-icon-'+(pages.length)).children().eq(0).append('<span id="numPhotos" class="badge bg-green">0</span>');
     
-    $('#tab-selector').append('<div><a href="" class="link next"><i class="icon icon-next"></i></a></div>');
+    $('#tab-selector').append('<div><a href="" class="link next"><i id="icon-next" class="icon icon-next"></i></a></div>');
     $('#tab-icon-1').addClass('active');
     $('#tab-1').addClass('active');
 	$.when.apply($, promises).then(function(){

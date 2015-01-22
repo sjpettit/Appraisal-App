@@ -129,6 +129,8 @@ function printAllOrders(){
                           "</div>"+
                         "</div>"+    
                       "</li>")
+                var ordersToLoad = orderArray;
+                loadOrders2(ordersToLoad);
                   
                 type='all';
                 if(orderArray.length==0){
@@ -215,6 +217,7 @@ function convertTime(time){
 
 
 
+
 function loadOrders(ordersToLoad){
 
 	myApp.onPageAfterAnimation('order-page', function(page) {
@@ -243,6 +246,31 @@ function loadOrders(ordersToLoad){
 					    
 	});
 }
+
+function loadOrders2(ordersToLoad){
+                    for(var j = 0;j<ordersToLoad.length;j++){
+                      $('#group-list').append(               
+                        "<li id=li-"+j+">"+
+                        "<div id="+j+" class=\"item-content item-link show-marker\">"+
+                          "<div class=\"item-inner\">"+
+                            "<div class=\"item-title-row\">"+
+                                "<div class=\"item-title\"> Order "+ordersToLoad[j].orderID+"</div>"+ 
+                            "</div>"+
+                            "<div class=\"item-subtitle\">  Due Date: "+ordersToLoad[j].order_due_date+"</div>"+
+                            /*"<div class=\"item-subtitle\">  Address: "+ordersToLoad[j].order_addres+"</div>"+
+                            "<div class=\"item-subtitle\">  City: "+ordersToLoad[j].city+", "+ordersToLoad[j].state+ "</div>"+
+                            "<div class=\"item-subtitle\">  Phone: <a href='#' class='phone-number'>"+ordersToLoad[j].contact_no+"</a></div>"+
+                            "<div class=\"item-subtitle\">  Party Name: "+ordersToLoad[j].order_party_name+"</div>"+
+                            "<div id=\"distance-"+j+"\"class=\"\"></div>"+
+                            "<div id=\"duration-"+j+"\"class=\"\"></div>"+*/
+                          "</div>"+    
+                        "</li>"
+                      )                    
+                      }
+
+}
+
+
 
 $$('.back').on('click', function(e) {
         $('.save').addClass("hidden");
@@ -837,6 +865,10 @@ myApp.onPageInit('main-page-1', function(page) {
                           "</div>"+
                         "</div>"+    
                       "</li>")
+                    var ordersToLoad = stateObjects[i].stateOrderArray;
+                    loadOrders2(ordersToLoad);
+  
+              
                   }
                 type='state';
                 }else{
@@ -871,6 +903,8 @@ myApp.onPageInit('main-page-1', function(page) {
                           "</div>"+
                         "</div>"+    
                       "</li>")
+                    var ordersToLoad = cityObjects[i].cityOrderArray;
+                    loadOrders2(ordersToLoad);
                   }
                   type='city';
               }else{
@@ -905,6 +939,8 @@ myApp.onPageInit('main-page-1', function(page) {
                         "</div>"+    
                       "</li>"
                     )
+                    var ordersToLoad = zipObjects[i].zipOrderArray;
+                    loadOrders2(ordersToLoad);
                   }
                   type='zip';
               }else{
@@ -919,9 +955,14 @@ myApp.onPageInit('main-page-1', function(page) {
                 });
         });
 
+});
 
-    $$('.logout').on('click', function(e) {
-        
+  var indexAfterAnimation;
+    $('.logout').on('click', function(e) {
+        if(indexAfterAnimation){
+          indexAfterAnimation.remove();
+        }
+        mainView.loadPage('index.html');
         $('.save').addClass("hidden");
         $('.submit').addClass("hidden");
         $('.send-back').addClass("hidden");
@@ -932,25 +973,45 @@ myApp.onPageInit('main-page-1', function(page) {
         document.getElementById('view-main').className = "view view-main navbar-through toolbar-through"
         document.getElementById('view-navbar').className = "view view-navbar hidden";
         document.getElementById('view-toolbar').className = "view view-toolbar hidden";
-        
+        myApp.hidePreloader();
         //window.location.href ='http://http://localhost:5000/apprasial-app/';
-        mainView.loadPage('login.html');
         tabTracking = numOfTabs;
-        login();
+        indexAfterAnimation = myApp.onPageAfterAnimation('index', function(page) {       
+                      login();
+                      console.log("logout");          
+        });
+
     });
 
+     myApp.onPageInit('*', function (page) {
+      console.log(page.name + ' initialized'); 
+    });
+    /*myApp.onPageInit('index', function(page) {       
+        $('.save').addClass("hidden");
+        $('.submit').addClass("hidden");
+        $('.send-back').addClass("hidden");
+        $('.save').removeClass("link");
+        $('.submit').removeClass("link");
+        $('.send-back').removeClass("link");
+        document.getElementById('view-left').className = "view view-left navbar-through toolbar-through hidden"
+        document.getElementById('view-main').className = "view view-main navbar-through toolbar-through"
+        document.getElementById('view-navbar').className = "view view-navbar hidden";
+        document.getElementById('view-toolbar').className = "view view-toolbar hidden";
+    });
+
+*/
 
 
-});
+
 // Show/hide preloader for remote ajax loaded pages
 // Probably should be removed on a production/local app
-$$(document).on('ajaxStart', function() {
+/*$$(document).on('ajaxStart', function() {
     myApp.showIndicator();
 });
 $$(document).on('ajaxComplete', function() {
     myApp.hideIndicator();
 
-});
+});*/
 var xmlhttp;
 if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp = new XMLHttpRequest();
@@ -970,6 +1031,7 @@ xmlhttp.onreadystatechange = function() {
 
 
 function login() {
+  console.log("login-modal");
 $$(".index-page").addClass(document.body.className);
     var modal = myApp.modalLogin('Enter your username and password', 'Login: ', function(username, password) {
         $.ajax({
@@ -981,7 +1043,6 @@ $$(".index-page").addClass(document.body.className);
                 }
             })
             .done(function(data) {
-                myApp.hidePreloader();
                 mainView.loadPage('main-page-1.html');
                 leftView.loadPage('left-page-1.html');
                 userKey = JSON.parse(data).data.id;
@@ -1008,8 +1069,7 @@ $$(".index-page").addClass(document.body.className);
       login();
     }
     );
-    $$(modal).children().addClass(document.body.className);
-    $$(modal.children[1]).children().addClass(document.body.className);
+
 }
 
 function dropdownGrey(id) //Function to make 'Select' in the drop down lists grey and the rest of the list black

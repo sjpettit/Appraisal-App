@@ -68,5 +68,8 @@
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
     <feature name="Camera"><param name="ios-package" value="CDVCamera" /></feature>
+    <feature name="Geolocation">
+     <param name="ios-package" value="CDVLocation" />
+    </feature>
     <access origin="*" subdomains="true" />
 </widget>

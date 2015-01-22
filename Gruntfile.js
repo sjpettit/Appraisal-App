@@ -97,7 +97,7 @@ module.exports = function (grunt) {
         },
         open: {
             kitchen: {
-                path: 'http://localhost:3000/kitchen-sink'
+                path: 'http://localhost:5000/Apprasial-App/'
             }
         },
         less: {
