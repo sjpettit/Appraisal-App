@@ -120,19 +120,27 @@ function printAllOrders(){
                       pluralityString = " Order";
                     } 
                 $('#group-list').append(               
-                      "<li class=\"order-button\">"+
-                      "<div id=\"0\" class=\"item-content item-link load-orders\">"+
+                    "<li class=\"accordion-item\">"+
+                      "<a href='#' id=\"0\" class=\"item-content item-link\">"+
                           "<div class=\"item-inner\">"+
-                                "<div class=\"item-title\">All Orders</div>"+ 
-                                "<div class=\"order-ammount\">"+orderArray.length+
-                                pluralityString+" Found<\div>"+
+                                "<div class=\"item-title\">All Orders<div class='item-subtitle' style='color:gray;'>"+orderArray.length+
+                                pluralityString+" Found</div></div>"+ 
+                                /*"<div class=\"order-ammount\">"+orderArray.length+
+                                pluralityString+" Found<\div>"+*/
                           "</div>"+
-                        "</div>"+    
-                      "</li>")
+                        "</a>"+ 
+                        '<div class="accordion-item-content">'+
+                          '<div class="content-block">'+
+                            '<ul id = "accordion-0">'+
+                            '</ul>'+
+                          '</div>'+
+                      '</div>'+  
+                    "</li>"
+)
                 var ordersToLoad = orderArray;
-                loadOrders2(ordersToLoad);
+                loadOrders2(ordersToLoad, 'all', 0);
                   
-                type='all';
+
                 if(orderArray.length==0){
                       $("#0").removeClass("item-link");
                       $("#0").removeClass("load-orders");
@@ -247,11 +255,12 @@ function loadOrders(ordersToLoad){
 	});
 }
 
-function loadOrders2(ordersToLoad){
+function loadOrders2(ordersToLoad, type, i){
+
                     for(var j = 0;j<ordersToLoad.length;j++){
-                      $('#group-list').append(               
+                      $('#accordion-'+i).append(               
                         "<li id=li-"+j+">"+
-                        "<div id="+j+" class=\"item-content item-link show-marker\">"+
+                        "<div id="+j+" class=\"item-content item-link to-map\">"+
                           "<div class=\"item-inner\">"+
                             "<div class=\"item-title-row\">"+
                                 "<div class=\"item-title\"> Order "+ordersToLoad[j].orderID+"</div>"+ 
@@ -267,6 +276,7 @@ function loadOrders2(ordersToLoad){
                         "</li>"
                       )                    
                       }
+
 
 }
 
@@ -856,21 +866,34 @@ myApp.onPageInit('main-page-1', function(page) {
                       pluralityString = " Order";
                     }
                     $('#group-list').append(               
-                      "<li class=\"order-button\">"+
-                      "<div id="+i+" class=\"item-content item-link load-orders\">"+
+                      "<li class=\"accordion-item\">"+
+                      "<a href='#' id="+i+" class=\"item-content item-link\">"+
                           "<div class=\"item-inner\">"+
-                                "<div class=\"item-title\">"+stateObjects[i].state+"</div>"+ 
-                                "<div class=\"order-ammount\">"+stateObjects[i].stateOrderArray.length+
-                                pluralityString+" Found<\div>"+
+                                "<div class=\"item-title\">"+stateObjects[i].state+"<div class='item-subtitle' style='color:gray;'>"+stateObjects[i].stateOrderArray.length+
+                                pluralityString+" Found</div></div>"+ 
+
+
+
+
+                               /* 
+                               "<div class=\"order-ammount\">"+stateObjects[i].stateOrderArray.length+
+                                pluralityString+" Found<\div>"+*/
                           "</div>"+
-                        "</div>"+    
-                      "</li>")
+                        "</a>"+    
+                      
+                      '<div class="accordion-item-content">'+
+                          '<div class="content-block">'+
+                            '<ul id = "accordion-'+i+'">'+
+                            '</ul>'+
+                          '</div>'+
+                      '</div>'+
+                      "</li>"
+                      )
                     var ordersToLoad = stateObjects[i].stateOrderArray;
-                    loadOrders2(ordersToLoad);
+                    loadOrders2(ordersToLoad ,'state', i);
   
               
                   }
-                type='state';
                 }else{
                   printAllOrders();
                 }
@@ -894,19 +917,27 @@ myApp.onPageInit('main-page-1', function(page) {
                       pluralityString = " Order";
                     }
                     $('#group-list').append(               
-                      "<li>"+
-                      "<div id="+i+" class=\"item-content item-link load-orders\">"+
+                      "<li class=\"accordion-item\">"+
+                      "<a href='#' id="+i+" class=\"item-content item-link \">"+
                           "<div class=\"item-inner\">"+
-                                "<div class=\"item-title\">"+cityObjects[i].city+"</div>"+ 
+                                "<div class=\"item-title\">"+cityObjects[i].city+"<div class='item-subtitle' style='color:gray;'>"+cityObjects[i].cityOrderArray.length+
+                                pluralityString+" Found</div></div>"+ 
+                                /*
+                                                                  
                                 "<div class=\"order-ammount\">"+cityObjects[i].cityOrderArray.length+
-                                pluralityString+" Found<\div>"+
+                                pluralityString+" Found<\div>"+*/
                           "</div>"+
-                        "</div>"+    
+                        "</a>"+    
+                      '<div class="accordion-item-content">'+
+                          '<div class="content-block">'+
+                            '<ul id = "accordion-'+i+'">'+
+                            '</ul>'+
+                          '</div>'+
+                      '</div>'+
                       "</li>")
                     var ordersToLoad = cityObjects[i].cityOrderArray;
-                    loadOrders2(ordersToLoad);
+                    loadOrders2(ordersToLoad, 'city', i);
                   }
-                  type='city';
               }else{
                   printAllOrders();
                 }
@@ -929,20 +960,28 @@ myApp.onPageInit('main-page-1', function(page) {
                       pluralityString = " Order";
                     }
                     $('#group-list').append(               
-                      "<li>"+
-                      "<div id="+i+" class=\"item-content item-link load-orders\">"+
+                      "<li class=\"accordion-item\">"+
+                      "<a href='#' id="+i+" class=\"item-content item-link \">"+
                           "<div class=\"item-inner\">"+
-                                "<div class=\"item-title\">"+zipObjects[i].zip+"</div>"+ 
-                                "<div class=\"order-ammount\">"+zipObjects[i].zipOrderArray.length+
-                                pluralityString+" Found<\div>"+
+                                "<div class=\"item-title\">"+zipObjects[i].zip+"<div class='item-subtitle' style='color:gray;'>"+zipObjects[i].zipOrderArray.length+
+                                pluralityString+" Found</div></div>"+ 
+                               /* 
+                               "<div class=\"order-ammount\">"+zipObjects[i].zipOrderArray.length+
+                                pluralityString+" Found<\div>"+*/
                           "</div>"+
-                        "</div>"+    
-                      "</li>"
+                        "</a>"+    
+                     
+                      '<div class="accordion-item-content">'+
+                          '<div class="content-block">'+
+                            '<ul id = "accordion-'+i+'">'+
+                            '</ul>'+
+                          '</div>'+
+                      '</div>'+
+                       "</li>"
                     )
                     var ordersToLoad = zipObjects[i].zipOrderArray;
-                    loadOrders2(ordersToLoad);
+                    loadOrders2(ordersToLoad, 'zip', i);
                   }
-                  type='zip';
               }else{
                 printAllOrders();
               }
