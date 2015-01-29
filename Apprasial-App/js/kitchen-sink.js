@@ -203,8 +203,83 @@ function convertTime(time) {
 }
 
 $$(document).on('click', '.load-orders', function(e) {
-    leftView.loadPage('order-page.html');
-    mainView.loadPage('map-page.html');
+
+    console.log(type);
+    var orderToLoad;
+    console.log(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id);
+    if (type == 'zip') {
+        var ordersToLoad = zipObjects[this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id].zipOrderArray;
+        orderToLoad = ordersToLoad[this.id];
+    } else if (type == 'state') {
+        var ordersToLoad = stateObjects[this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id].stateOrderArray;
+        orderToLoad = ordersToLoad[this.id];;
+    } else if (type == 'city') {
+        var ordersToLoad = cityObjects[this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id].cityOrderArray;
+        var orderToLoad = ordersToLoad[this.id];
+    } else if (type == 'all') {
+        var ordersToLoad = orderArray;
+        orderToLoad = ordersToLoad[this.id];
+    }
+    currentOrder = orderToLoad;
+    currentOrderArray = ordersToLoad;
+    orderID = orderToLoad.orderID;
+    formsToLoad = orderToLoad.forms;
+    if(listStatus == 0){
+      leftView.loadPage('order-page.html');
+      mainView.loadPage('map-page.html');
+      loadOrder(orderToLoad);
+    }else{
+      
+      var d = document.createElement('div');
+      d.innerHTML =       
+      "<li id=li-" + 0 + ">" +
+            "<div id=" + 0 + " class=\"item-content item-link show-marker\">" +
+            "<div class=\"item-inner\">" +
+            "<div class=\"item-title-row\">" +
+            "<div class=\"item-title\"> Order " + orderToLoad.orderID + "</div>" +
+            "</div>" +
+            "<div class=\"item-subtitle\">  Due Date: " + orderToLoad.order_due_date + "</div>" +
+            "<div class=\"item-subtitle\">  Address: " + orderToLoad.order_addres + "</div>" +
+            "<div class=\"item-subtitle\">  City: " + orderToLoad.city + ", " + orderToLoad.state + "</div>" +
+            "<div class=\"item-subtitle\">  Phone: <a href='#' class='phone-number'>" + orderToLoad.contact_no + "</a></div>" +
+            "<div class=\"item-subtitle\">  Party Name: " + orderToLoad.order_party_name + "</div>" +
+            "<div id=\"distance-" + 0 + "\"class=\"\"></div>" +
+            "<div id=\"duration-" + 0 + "\"class=\"\"></div>" +
+            "</div>" +
+            "</li>";
+      prevOrderDiv = d.firstChild; 
+            console.log(orderID);
+                  $.ajax({
+                url: mcServer + '/api/v1/formData?orderID=' + orderID + '&apiKey=ffa13b8d-de71-4c73-a48d-1bcb56bc2386',
+                beforeSend: function(xhr) {
+                    myApp.showPreloader();
+                    xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                }
+            }).done(function(data) {
+                //myApp.hidePreloader();
+                viewModel = resetViewModel();
+                if (JSON.parse(data).message == 'FORM') {
+                    form = JSON.parse(data).form;
+                    form = JSON.parse(form);
+
+                    if (form.hasOwnProperty('subjectCity')) {
+                        var mapModel = ko.mapping.fromJS(form);
+                        for (var property in viewModel) {
+
+                            if (mapModel.hasOwnProperty(property) && property != '__ko_mapping__') {
+                                viewModel[property] = mapModel[property];
+                            }
+                        }
+                    }
+                }
+                //console.log(ko.mapping.toJS(viewModel));
+                $('#widget-bar').css('display', 'none');
+                $('#widget-bar').css('animation', 'none');
+                leftView.loadPage('order-info.html');
+                mainView.loadPage('tab-page.html');
+                $('#back-button').removeClass("invisible");
+            });
+    }
     $("#tool-icon-1").addClass("hidden");
     $("#tool-icon-1").removeClass("tab-link");
     $("#tool-icon-2").addClass("hidden");
@@ -213,7 +288,7 @@ $$(document).on('click', '.load-orders', function(e) {
     $("#tool-icon-3").removeClass("tab-link");
 
 
-    console.log(type);
+    /*console.log(type);
     var orderToLoad;
     console.log(this.parentNode.parentNode.parentNode.parentNode.parentNode.children[0].id);
     if (type == 'zip') {
@@ -232,9 +307,8 @@ $$(document).on('click', '.load-orders', function(e) {
         var ordersToLoad = orderArray;
         orderToLoad = ordersToLoad[this.id];
         loadOrder(orderToLoad);
-    }
-    currentOrder = orderToLoad;
-    currentOrderArray = ordersToLoad;
+    }*/
+
 
 });
 
@@ -292,6 +366,7 @@ function loadOrder(orderToLoad) {
             "</div>" +
             "</li>"
         )
+
     });
 }
 
@@ -299,7 +374,7 @@ function loadOrders2(ordersToLoad, orderType, i) {
     type = orderType;
     for (var j = 0; j < ordersToLoad.length; j++) {
         $('#accordion-' + i).append(
-            "<li id=li-" + j + ">" +
+            "<li id=accordion-li-" + j + ">" +
             "<div id=" + j + " class=\"item-content item-link to-map load-orders\">" +
             "<div class=\"item-inner\">" +
             "<div class=\"item-title-row\">" +
@@ -384,14 +459,15 @@ $$(document).on('click', '.next', function(e) {
 
 myApp.onPageAfterAnimation('order-info', function(page) {
     prevOrderDiv.children[0].className = "item-content";
-    $('.save').removeClass("hidden");
-    $('.submit').removeClass("hidden");
-    $('.send-back').removeClass("hidden");
-    $('.save').addClass("link");
-    $('.submit').addClass("link");
-    $('.send-back').addClass("link");
+    if(listStatus == 0){
+      $('.save').removeClass("hidden");
+      $('.submit').removeClass("hidden");
+      $('.send-back').removeClass("hidden");
+      $('.save').addClass("link");
+      $('.submit').addClass("link");
+      $('.send-back').addClass("link");
+    }
     $('#order-info').append(prevOrderDiv);
-    $('#order-info').append(drivingSteps);
 
 });
 
@@ -529,15 +605,11 @@ $$(document).on('click', '.send-back', function(e) {
 ///////////
 
 $$(document).on('click', '.show-marker', function(e) {
-
-
-
+    prevOrderDiv = document.getElementById("li-0");
+    console.log(prevOrderDiv);
     if (prevOrderDiv) {
         prevOrderDiv.children[0].className = "item-content item-link show-marker";
         //if (prevOrderDiv == document.getElementById("li-" + this.id)) {
-            orderID = currentOrderArray[this.id].orderID;
-            formsToLoad = currentOrderArray[this.id].forms;
-            orderID = currentOrderArray[this.id].orderID;
             $.ajax({
                 url: mcServer + '/api/v1/formData?orderID=' + orderID + '&apiKey=ffa13b8d-de71-4c73-a48d-1bcb56bc2386',
                 beforeSend: function(xhr) {
@@ -564,6 +636,7 @@ $$(document).on('click', '.show-marker', function(e) {
                 //console.log(ko.mapping.toJS(viewModel));
                 $('#widget-bar').css('display', 'none');
                 $('#widget-bar').css('animation', 'none');
+
                 leftView.loadPage('order-info.html');
                 mainView.loadPage('tab-page.html');
             });
@@ -663,14 +736,16 @@ myApp.onPageAfterAnimation('map-page', function(page) {
         };
         dirService.route(request, function(result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
+                 myApp.showPreloader();
                 drivingSteps = "<li>" + "<div class=\"item-content\">" + "<div class=\"item-inner\">" + "<div class=\"item-title\"> Driving Instructions </div></div></div></li>";
                 for (var i = 0; i < result.routes[0].legs[0].steps.length; i++) {
                     drivingSteps = drivingSteps + "<li>" + "<div class=\"item-content\">" + "<div class=\"item-inner\">" + "<div class=\"item-text\">" + result.routes[0].legs[0].steps[i].instructions + "</div></div></div></li>";
                 }
                 document.getElementById('duration-' + currId).className = "item-text";
                 document.getElementById('duration-' + currId).innerHTML = "Driving Duration: " + convertTime(result.routes[0].legs[0].duration.value);
-
+                $('#order-list').append(drivingSteps);
                 dirRenderer.setDirections(result);
+                myApp.hidePreloader();
             }
         });
 
@@ -706,7 +781,7 @@ myApp.onPageAfterAnimation('map-page', function(page) {
         //TODO add error function
     });
 ///////
-
+    
 //////
         myApp.hidePreloader();
     }
@@ -864,9 +939,8 @@ myApp.onPageAfterAnimation('map-page', function(page) {
     $.when(zillowDeffered, zillowPicDeffered, mapDeffered).done(function() {
         myApp.hidePreloader();
     });
-    document.getElementById(currId).className = "item-content item-link show-marker active-link";
-    prevOrderDiv = document.getElementById("li-" + currId);
 
+    document.getElementById(currId).className = "item-content item-link show-marker active-link";
 });
 
 
@@ -1052,9 +1126,6 @@ myApp.onPageInit('main-page-1', function(page) {
 
 var indexAfterAnimation;
 $('.logout').on('click', function(e) {
-    if (indexAfterAnimation) {
-        indexAfterAnimation.remove();
-    }
     mainView.loadPage('index.html');
     $('.save').addClass("hidden");
     $('.submit').addClass("hidden");
@@ -1069,11 +1140,11 @@ $('.logout').on('click', function(e) {
     myApp.hidePreloader();
     //window.location.href ='http://http://localhost:5000/apprasial-app/';
     tabTracking = numOfTabs;
-    indexAfterAnimation = myApp.onPageAfterAnimation('index', function(page) {
+    if(!indexAfterAnimation){
+      indexAfterAnimation = myApp.onPageAfterAnimation('index', function(page) {
         login();
-        console.log("logout");
-    });
-
+      });
+    }
 });
 
 myApp.onPageInit('*', function(page) {

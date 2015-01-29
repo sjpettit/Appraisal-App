@@ -11,33 +11,39 @@
 			}
 
 		tabPage.getTabPage = function(){
-
+      var swipeleft;
+      var swiperight;
 			myApp.onPageInit('tab-page', function(page) {
-        $("#view-main").on( "swipeleft", function( event ) { 
-          var currentTab = $(".tab.active").attr('id').substring(4,$(".tab.active").attr('id').length);
-          var nextTab = parseInt(currentTab)+1;
-          console.log(document.getElementsByClassName("tab-link")[3]);
-          console.log(document.getElementById("tab-icon-"+nextTab));
-          if(document.getElementsByClassName("tab-link")[3] == document.getElementById("tab-icon-"+nextTab)){
-              document.getElementById("icon-next").click();
-          }
-          if(document.getElementById("tab-icon-"+nextTab)){
-             document.getElementById("tab-icon-"+nextTab).click();
-          }
-      } );
+        if(!swipeleft){
+          swipeleft = $("#view-main").on( "swipeleft", function( event ) { 
+            var currentTab = $(".tab.active").attr('id').substring(4,$(".tab.active").attr('id').length);
+            var nextTab = parseInt(currentTab)+1;
+            console.log(document.getElementsByClassName("tab-link")[3]);
+            console.log(document.getElementById("tab-icon-"+nextTab));
+            if(document.getElementsByClassName("tab-link")[3] == document.getElementById("tab-icon-"+nextTab)){
+                document.getElementById("icon-next").click();
+            }
+            if(document.getElementById("tab-icon-"+nextTab)){
+               document.getElementById("tab-icon-"+nextTab).click();
+            }
+          });
+        }
+        if(!swiperight){
+          swiperight = $("#view-main").on( "swiperight", function( event ) { 
+            var currentTab = $(".tab.active").attr('id').substring(4,$(".tab.active").attr('id').length);
+            var prevTab = parseInt(currentTab)-1;
+            console.log(document.getElementsByClassName("tab-link")[0]);
+            console.log(document.getElementById("tab-icon-"+prevTab));
+            if(document.getElementsByClassName("tab-link")[0] == document.getElementById("tab-icon-"+prevTab)){
+                document.getElementById("icon-prev").click();
+            }
+            if(document.getElementById("tab-icon-"+prevTab)){
+               document.getElementById("tab-icon-"+prevTab).click();
+            }
+          });
+        }
+        
 
-      $("#view-main").on( "swiperight", function( event ) { 
-          var currentTab = $(".tab.active").attr('id').substring(4,$(".tab.active").attr('id').length);
-          var prevTab = parseInt(currentTab)-1;
-          console.log(document.getElementsByClassName("tab-link")[0]);
-          console.log(document.getElementById("tab-icon-"+prevTab));
-          if(document.getElementsByClassName("tab-link")[0] == document.getElementById("tab-icon-"+prevTab)){
-              document.getElementById("icon-prev").click();
-          }
-          if(document.getElementById("tab-icon-"+prevTab)){
-             document.getElementById("tab-icon-"+prevTab).click();
-          }
-      } );
         document.getElementById('view-main').className = "view view-main navbar-through frame-shift"
         
         //read file and append to tab-page
@@ -46,7 +52,7 @@
         $("#form-select").change(function() {
             eval($("#form-select").val());
             myApp.showPreloader();
-             disableFeilds();
+             
             //window.setTimeout( function(){
             	tabPage.getPictureList();
               tabTracking = numOfTabs;
@@ -67,7 +73,6 @@
             
            
           //},200)
-
         })
         
         var photos;
@@ -457,6 +462,7 @@
 	$.when.apply($, promises).then(function(){
 		//console.log(promises);
 		reapplyBindings();
+    disableFeilds();
 		 myApp.hidePreloader();
 	});
   }
