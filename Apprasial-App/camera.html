@@ -42,10 +42,92 @@
 
     // Called when a photo is successfully retrieved
     //
+
+      function convertImgToBase64(url, callback, outputFormat){
+        var canvas = document.createElement('CANVAS');
+        var ctx = canvas.getContext('2d');
+        var img = new Image;
+        img.crossOrigin = 'Anonymous';
+        img.onload = function(){
+          canvas.height = img.height;
+          canvas.width = img.width;
+            ctx.drawImage(img,0,0);
+            var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+            callback.call(this, dataURL);
+              // Clean up
+            canvas = null; 
+        };
+        img.src = url;
+      }
+
+      function sendBase64(base64){
+        console.log(typeof base64);
+        console.log(base64.length);
+        var data = {};
+        data.files = base64.substring(0,100000);
+        var base64remainder = base64;
+        var base64array = [];
+        while(base64remainder.length > 0 ){
+          if(base64remainder.length > 100000){
+            base64array.push(base64remainder.substring(0,100000));
+            base64remainder = base64remainder.substring(100000,base64remainder.length);
+          }else {
+            base64array.push(base64remainder);
+            base64remainder = "";
+          }
+        }
+        sendDataChunks(base64array,1,0);
+         /*$.ajax({
+            url: 'http://localhost:3000'+"/api/v1/uploadFile?apiKey=2AC86B2C-C32B5-7EA-E6DC-26D35519C00t&orderID="+orderID,
+            contentType: 'application/json',
+            type: "POST",
+            data: JSON.stringify(data),
+            beforeSend: function(xhr) {
+                myApp.showPreloader();
+            }
+        }).done(function(data) {
+            myApp.hidePreloader();
+        }).error(function(data){
+          myApp.hidePreloader();
+        });*/
+
+      }
+
+      function sendDataChunks(base64array,imgNum,packetNum){
+        var data = {};
+        data.files = base64array[0];
+        data.seqNum = imgNum+'.'+packetNum;
+        if(packetNum == 0){
+          myApp.showPreloader();
+        }
+        if(data.files){
+           $.ajax({
+              url: 'http://localhost:3000'+"/api/v1/uploadFile?apiKey=2AC86B2C-C32B5-7EA-E6DC-26D35519C00t&orderID="+orderID,
+              contentType: 'application/json',
+              type: "POST",
+              data: JSON.stringify(data),
+              beforeSend: function(xhr) {
+              }
+          }).success(function(data) {
+            console.log(packetNum);
+              base64array.shift();
+              sendDataChunks(base64array,imgNum,packetNum+1);
+          }).error(function(data){
+            console.log("error");
+            myApp.hidePreloader();
+          });
+        }else{
+          myApp.hidePreloader();
+        }
+      }
+
     function onPhotoURISuccess(imageURI) {
       // Uncomment to view the image file URI
       // console.log(imageURI);
-
+        convertImgToBase64(imageURI,function(base64Img){
+          console.log(base64Img);
+          sendBase64(base64Img);
+        });
       // Get image handle
       //
       var largeImage = document.getElementById('largeImage');

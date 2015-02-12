@@ -202,7 +202,7 @@ function convertTime(time) {
     return timeString
 }
 
-$$(document).on('click', '.load-orders', function(e) {
+$$(document).on('touchend', '.load-orders', function(e) {
 
     console.log(type);
     var orderToLoad;
@@ -419,6 +419,9 @@ $$(document).on('click', '.prev', function(e) {
 
     }
     if (tabTracking > 4) {
+        if($("#tab-icon-" + (tabTracking)).hasClass("active")){
+            document.getElementById("tab-icon-" + (tabTracking-1)).click();
+        }
         $("#tab-icon-" + tabTracking).addClass("hidden");
         $("#tab-icon-" + tabTracking).removeClass("tab-link");
         $("#tab-icon-" + (tabTracking - numOfTabs)).addClass("tab-link");
@@ -439,6 +442,9 @@ $$(document).on('click', '.next', function(e) {
     }
     if (tabTracking <= tabLength) {
         tabTracking++;
+        if($("#tab-icon-" + (tabTracking - numOfTabs)).hasClass("active")){
+            document.getElementById("tab-icon-" + (tabTracking - numOfTabs+1)).click();
+        }
         $("#tab-icon-" + (tabTracking - numOfTabs)).removeClass("tab-link");
         $("#tab-icon-" + (tabTracking - numOfTabs)).addClass("hidden");
         $("#tab-icon-" + tabTracking).removeClass("hidden");
@@ -604,7 +610,7 @@ $$(document).on('click', '.send-back', function(e) {
 });
 ///////////
 
-$$(document).on('click', '.show-marker', function(e) {
+$$(document).on('touchend', '.show-marker', function(e) {
     prevOrderDiv = document.getElementById("li-0");
     console.log(prevOrderDiv);
     if (prevOrderDiv) {
@@ -734,21 +740,26 @@ myApp.onPageAfterAnimation('map-page', function(page) {
             destination: destinationMarker.position,
             travelMode: google.maps.TravelMode.DRIVING
         };
+        myApp.showPreloader();
         dirService.route(request, function(result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                 myApp.showPreloader();
+                 
                 drivingSteps = "<li>" + "<div class=\"item-content\">" + "<div class=\"item-inner\">" + "<div class=\"item-title\"> Driving Instructions </div></div></div></li>";
                 for (var i = 0; i < result.routes[0].legs[0].steps.length; i++) {
                     drivingSteps = drivingSteps + "<li>" + "<div class=\"item-content\">" + "<div class=\"item-inner\">" + "<div class=\"item-text\">" + result.routes[0].legs[0].steps[i].instructions + "</div></div></div></li>";
                 }
+                console.log(currId);
                 document.getElementById('duration-' + currId).className = "item-text";
                 document.getElementById('duration-' + currId).innerHTML = "Driving Duration: " + convertTime(result.routes[0].legs[0].duration.value);
                 $('#order-list').append(drivingSteps);
                 dirRenderer.setDirections(result);
-                myApp.hidePreloader();
+
+                
             }
         });
-
+        google.maps.event.addListener(dirRenderer,'directions_changed', function(){
+            myApp.hidePreloader();
+        });
         //A
         var streetViewCheck = new google.maps.StreetViewService();
         streetViewCheck.getPanoramaByLocation(myLatlng, 50, function(result, status) {
@@ -1340,3 +1351,8 @@ function fadeInFirstComment() {
         opacity: 1
     }, 1000);
 }
+
+
+
+
+
