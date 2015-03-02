@@ -202,7 +202,7 @@ function convertTime(time) {
     return timeString
 }
 
-$$(document).on('touchend', '.load-orders', function(e) {
+$$(document).on('click', '.load-orders', function(e) {
 
     console.log(type);
     var orderToLoad;
@@ -610,7 +610,7 @@ $$(document).on('click', '.send-back', function(e) {
 });
 ///////////
 
-$$(document).on('touchend', '.show-marker', function(e) {
+$$(document).on('click', '.show-marker', function(e) {
     prevOrderDiv = document.getElementById("li-0");
     console.log(prevOrderDiv);
     if (prevOrderDiv) {

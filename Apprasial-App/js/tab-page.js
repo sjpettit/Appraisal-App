@@ -99,7 +99,7 @@
             for(var i = 0; i<formsToLoad.length;i++){
               $("#form-select").append('<option value="load'+formsToLoad[i]+'();">'+formsToLoad[i]+'</option>');
             }
-
+            	createGrid();
         
         /*myDropzone = new Dropzone("#myDropzone", { 
           url: mcServer+"/api/v1/uploadFile?apiKey=2AC86B2C-C32B5-7EA-E6DC-26D35519C00t&orderID="+orderID,
@@ -115,13 +115,13 @@
       });
 
       /////////
-      tabPage.resizeImages = function(numPhotos){
-        var containerHeight = parseInt($(window).height())-(68*4);
-        var containerWidth = parseInt($('#tabs-container').width());
+      tabPage.resizeImages = function(imgs, containerHeight, containerWidth){
+        //var containerHeight = parseInt($(window).height())-(68*4);
+        //var containerWidth = parseInt($('#tabs-container').width());
         var theImages = [];
-        var imgs = [];
-        for(var i = 0; i<numPhotos;i++){
-          imgs.push($('#image-'+i));
+        //var imgs = [];
+        for(var i = 0; i<imgs.length;i++){
+          //imgs.push($('#image-'+i));
           var img = imgs[i];
           theImages.push(new Image());
           theImages[i].setAttribute("id", i);
@@ -156,6 +156,7 @@
             }
           }
         }
+        return imgs;
       }
       
       tabPage.loadSlider = function(){
@@ -218,7 +219,7 @@
   				'</div>'
   				);
 			  }
-			  tabPage.resizeImages(picList.list.length);
+			  //tabPage.resizeImages(picList.list.length);
 			  myApp.hidePreloader();
 			  tabPage.loadSlider();
 			 }else{
@@ -423,7 +424,22 @@
 			}
 		});
 	}
-	
+  
+  
+  function createGrid(){
+        var thumbnailHeight = 100;
+        var thumbnailWidth = 100;
+        var containerHeight = parseInt($(window).height())-(68*4);
+        var containerWidth = parseInt($('#tabs-container').width());
+        var numPhotosDisplayed = Math.floor(containerHeight/thumbnailHeight)*Math.floor(containerWidth/thumbnailWidth); 
+        $('#thumbnail-container').append('<div style="height:100px;width:100px;"><img id="image-0" src="img/mountains.jpg"></div>');
+        var thumbnailImgs = [];
+        thumbnailImgs.push($('#image-0'));
+        thumbnailImgs = tabPage.resizeImages(thumbnailImgs,thumbnailHeight,thumbnailWidth);
+        //$('#thumbnail-container').append('<div style="height:100px;width:100px;">'+thumbnailImgs[0]+'</div>';
+        console.log(numPhotosDisplayed);
+  }
+
     function loadTabs(pages, tabNames, imageIcons)
   {
     //clear divs
